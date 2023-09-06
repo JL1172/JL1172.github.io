@@ -87,4 +87,36 @@ export const StyledGraph = styled.div`
     flex-direction : column;
     align-items : center;
     justify-content : center;
+    #main {
+        background-color : white;
+        display : flex;
+        flex-direction : column;
+        width : 40rem;
+        justify-content : center;
+        align-items : center;
+        padding : 3rem;
+        border-radius : 15px;
+        box-shadow : 0 0 2em white;
+    }
+    h3 {
+        margin-bottom : 3rem;
+    }
+    #graphs {
+        width : 35rem;
+    }
+    select {
+        border : none;
+        margin-bottom : 1rem;
+        width : 35rem;
+        height : 3rem;
+        border-radius : 10rem;
+        background-color : lightgray;
+        &:focus {
+            outline : none;
+            box-shadow : 0 0 3em lightblue;
+        }
+        option {
+            text-align : center;
+        }
+    }
 `

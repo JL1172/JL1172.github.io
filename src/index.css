@@ -28,6 +28,13 @@ body {
   display: flex;
 }
 
+.info {
+  font-size: 20px;
+}
+.fullInfo {
+  border : 2px solid gray;
+}
+
 
 
 

@@ -27,7 +27,7 @@ export const symbolQuery = (state = initialState, action) => {
         case(FETCHING_SECURITY_SUCCESS) :
             return({...state,
                 currentSecurityInformation :
-                 [state.symbolInQue, action.payload], symbolInQue : ""})
+                 [action.payload], symbolInQue : ""})
         case(VIEW_SAVED_SECURITY) : 
             return({...state, viewSavedSecurities : !state.viewSavedSecurities});
         case(SET_TITLE) :
