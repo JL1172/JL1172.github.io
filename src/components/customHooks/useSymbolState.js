@@ -8,7 +8,7 @@ export const useSymbolState = (API_KEY) => {
         axios.get(`https://finnhub.io/api/v1/stock/symbol?exchange=US&token=${API_KEY}`)
         .then(res=> {
             const arrayOfSymbols = res.data.slice(0,200);
-          setSymbols([...symbols, arrayOfSymbols]);
+          setSymbols(arrayOfSymbols);
         })
         .catch(err=> console.error(err.message))
       },[])

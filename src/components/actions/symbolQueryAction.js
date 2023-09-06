@@ -19,7 +19,7 @@ export const submitSearch = (symbolInQue) => dispatch => {
     .catch(err=> dispatch(isFetchingError(err.message)))
 }
 
-const changeSymbol = (value) => {
+export const changeSymbol = (value) => {
     return{type : CHANGE_SYMBOL, payload : value}
 }
 const isFetchingSecurity = (aBoolean) => {

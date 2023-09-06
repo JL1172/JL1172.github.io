@@ -16,7 +16,9 @@ const SavedStocks = (props) => {
                     return <div key={i}>{n.symbol}</div>
                 })}
             </Saved>
-            <span onClick={() => props.viewSavedSecurities()} style={{ marginTop: "5rem", cursor: 'pointer', transition : ".3s ease-in-out" }} className="material-symbols-outlined">
+            <span onClick={() => props.viewSavedSecurities()} 
+            style={{ backgroundColor : "lightgray" ,marginTop: "5rem", cursor: 'pointer', transition : ".3s ease-in-out" }} 
+            className="material-symbols-outlined">
                 {props.viewSaved ? "arrow_back" : "arrow_forward"}
             </span>
         </>

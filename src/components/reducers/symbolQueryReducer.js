@@ -17,6 +17,7 @@ const initialState = {
 export const symbolQuery = (state = initialState, action) => {
     switch(action.type) {
         case(CHANGE_SYMBOL) :
+        console.log(action.payload)
             return({...state, symbolInQue : action.payload});
         case(IS_FETCHING_SECURITY) :
             return({...state, isFetching : action.payload});

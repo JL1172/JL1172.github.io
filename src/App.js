@@ -5,6 +5,7 @@ import { useSymbolState } from './components/customHooks/useSymbolState';
 import { StyledDiv } from './components/styled/styledComponents';
 import Header from "/src/components/Header.js";
 import SavedStocks from "/src/components/SavedStocks.js";
+import Graph from './components/Graph';
 
 function App() {
   const [symbols] = useSymbolState(API_KEY);
@@ -12,6 +13,7 @@ function App() {
     <StyledDiv className="App">
       <Header />
       <SavedStocks />
+      <Graph symbols = {symbols} />
     </StyledDiv>
   );
 }
