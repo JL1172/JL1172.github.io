@@ -8,6 +8,7 @@ export const FETCHING_SECURITY_SUCCESS = "FETCHING_SECURITY_SUCCESS";
 export const VIEW_SAVED_SECURITY = "VIEW_SAVED_SECURITY";
 export const SET_TITLE = 'SET_TITLE'; 
 export const SEARCH_RESULTS = "SEARCH_RESULTS";
+export const THIRD_SEARCH = "THIRD_SEARCH"; 
 // /stock/candle?symbol=AAPL&resolution=1&from=1693493346&to=1693752546
 // /stock/metric?symbol=AAPL&metric=all
 
@@ -45,4 +46,7 @@ export const setTitle = (title) => {
 }
 export const searchResults = (value) => {
     return {type : SEARCH_RESULTS, payload : value}; 
+}
+export const thirdSearch = (value) => {
+    return {type : THIRD_SEARCH, payload : value}; 
 }

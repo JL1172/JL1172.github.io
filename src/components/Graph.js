@@ -7,10 +7,9 @@ import { Button, Spinner } from "reactstrap";
 
 const Graph = (props) => {
     const giveANewTitle = (symbol,title) => {
-        console.log(title)
         props.submitSearch(symbol,title)
     }
-    console.log(props.symbols)
+    // console.log(props.symbols)
     return (
         <StyledGraph>
             {!props.isFetching ?
@@ -49,8 +48,7 @@ const Graph = (props) => {
                     <select type="text" onChange={(e) => props.changeSymbol(e.target.value)} value={props.symbolInQue.displaySymbol}>
                         <option value = "">select</option>
                         {props.symbols.map((n, i) => {
-                            console.log(n)
-                            return <option key={i} value={JSON.stringify(n)}>{props.hardFalse ? `${n}` : `${n.displaySymbol} ${n.description}`}</option>
+                            return <option key={i} value={JSON.stringify(n)}>{n.displaySymbol} {n.description}</option>
                         })}
                     </select>
                     <button onClick={() => giveANewTitle(props.symbolInQue,props.overFlowInformation.description)}>Search Security</button></main>

@@ -1,8 +1,9 @@
 import { connect } from "react-redux"
 import React from "react";
-import { searchResults } from "./actions/symbolQueryAction";
+import { searchResults, submitSearch, thirdSearch } from "./actions/symbolQueryAction";
 
 const Header = (props) => {
+    console.log(props.hardFalse)
     return (
         <div id="header">
             <div id="profile"><span className="material-symbols-outlined">
@@ -10,6 +11,15 @@ const Header = (props) => {
             </span>Profile</div>
             <div>
                 <input type = "text" value = {props.filteredResults} onChange={(e)=> props.searchResults(e.target.value)} />
+                <select onChange = {(e)=> props.thirdSearch(e.target.value)} value = {props.symbols.description} disabled = {false}>
+                    {props.symbols.length === 1 ? <option value = ""></option> : "" }
+                    {props.symbols.map((n,i)=> {
+                        return <option 
+                        value = {JSON.stringify(n)}
+                         key = {i}>{n.description}</option>
+                    })}
+                </select>
+                <button disabled = {!props.hardFalse} onClick={()=> props.submitSearch(props.secondaryQue.displaySymbol, props.secondaryQue.description)}>Fetch Data</button>
             </div>
             <div id="accountBalance">
                 <span className="material-symbols-outlined">
@@ -25,7 +35,9 @@ const mapStateToProps = state => {
     return {
         accountBalance: state.symbolQueryReducer.accountBalance,
         filteredResults : state.symbolQueryReducer.filteredResults,
+        secondaryQue : state.symbolQueryReducer.secondaryQue, 
+        hardFalse : state.symbolQueryReducer.hardFalse,
     }
 }
 
-export default connect(mapStateToProps, {searchResults})(Header);
+export default connect(mapStateToProps, {searchResults, thirdSearch, submitSearch})(Header);

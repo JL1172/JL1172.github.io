@@ -11,25 +11,27 @@ import { searchResults } from './components/actions/symbolQueryAction';
 
 function App(props) {
   const [symbols] = useSymbolState(API_KEY);
+
   const filteredList = () => {
-    let lookUp = props.filteredResults.trim().toLowerCase();
-    if (!lookUp) return symbols;
-    let symbolDescriptions = [];
-    let res = symbols.map((n,i)=> {
-      symbolDescriptions.push(n.description);
+    const term = props.filteredResults.trim().toLowerCase();
+    let parent = []
+    let res = symbols.map(n=> {
+      parent.push({description : n.description, displaySymbol : n.displaySymbol})
     })
-    return symbolDescriptions.filter((n,i)=> {
-        if(n.toLowerCase().includes(lookUp)) {
-          let index = symbolDescriptions.findIndex(item => item.toLowerCase() == n.toLowerCase())
-          return symbols.at(index);
-        }
+    console.log(parent)
+    if (!term) return parent;
+    else {
+    return parent.filter((n,i)=> {
+      return n.description.toLowerCase().includes(term)
     })
   }
+  }
+
   return (
     <StyledDiv className="App">
-      <Header />
+      <Header symbols = {filteredList()} />
       <SavedStocks />
-      <Graph symbols = {filteredList()} />
+      <Graph symbols = {symbols} />
     </StyledDiv>
   );
 }
