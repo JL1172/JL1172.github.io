@@ -1,4 +1,4 @@
-import { CHANGE_SYMBOL, FETCHING_SECURITY_SUCCESS, IS_FETCHING_ERROR, IS_FETCHING_SECURITY, SAVE_SECURITY, SEARCH_RESULTS, SET_TITLE, THIRD_SEARCH, VIEW_SAVED_SECURITY } from "../actions/symbolQueryAction"
+import { CHANGE_SYMBOL, FETCHING_SECURITY_SUCCESS, IS_FETCHING_ERROR, IS_FETCHING_SECURITY, REMOVE, SAVE_SECURITY, SEARCH_RESULTS, SET_TITLE, THIRD_SEARCH, VIEW_SAVED_SECURITY } from "../actions/symbolQueryAction"
 import { API_KEY } from "../../@key/key";
 import { useSymbolState } from "../customHooks/useSymbolState";
 
@@ -43,11 +43,12 @@ export const symbolQuery = (state = initialState, action) => {
             return({...state, secondaryQue :
                  {description : newParse.description, displaySymbol : newParse.displaySymbol}, hardFalse : true})
        case(SAVE_SECURITY) :
-            if (state.savedSecurities.filter(n => n.symbol === action.payload.symbol).length > 0) {
-                return({...state,savedSecurities : state.savedSecurities.filter((n,i) => n.symbol !== action.payload.symbol )})
-            } else {
-            return({...state, savedSecurities : [...state.savedSecurities, action.payload]})
-            }
+                let found = state.savedSecurities.find(n => n.symbol === action.payload.symbol);
+                if (!found) {
+                return({...state, savedSecurities : [...state.savedSecurities,action.payload]})
+                }
+        case(REMOVE) : 
+                return({...state, savedSecurities : state.savedSecurities.filter(n => n.id !== action.payload)})
         default : 
             return(state);
     }

@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Saved, chevronRight, chevronLeft } from "./styled/styledComponents";
-import { viewSavedSecurities } from "./actions/symbolQueryAction";
+import { addSecurity, remove, viewSavedSecurities } from "./actions/symbolQueryAction";
 
 const SavedStocks = (props) => {
     
@@ -14,7 +14,11 @@ const SavedStocks = (props) => {
                     </span></h4>
                     </div>
                 {props.savedSecurities.length > 0 && props.savedSecurities.map((n, i) => {
-                    return <div className = "savedAllOfThese" key={i}>{n.title}</div>
+                    return <div className = "savedAllOfThese" key={i}>{n.saved && n.title}<span style = {{ cursor : "pointer"}} 
+                    onClick={()=> props.remove(n.id)}
+                    className="material-symbols-outlined">
+                    remove
+                    </span></div>
                 })}
             </Saved>
             <span onClick={() => props.viewSavedSecurities()} 
@@ -30,7 +34,13 @@ const mapStateToProps = (state) => {
     return {
         savedSecurities: state.symbolQueryReducer.savedSecurities,
         viewSaved: state.symbolQueryReducer.viewSavedSecurities,
+        currentInformation: state.symbolQueryReducer.currentSecurityInformation,
+        symbolInQue: state.symbolQueryReducer.symbolInQue,
+        isFetching: state.symbolQueryReducer.isFetching,
+        title: state.symbolQueryReducer.title,
+        overFlowInformation: state.symbolQueryReducer.overFlowInformation,
+        hardFalse: state.symbolQueryReducer.hardFalse,
     }
 }
 
-export default connect(mapStateToProps, { viewSavedSecurities })(SavedStocks)
+export default connect(mapStateToProps, { viewSavedSecurities, remove })(SavedStocks)

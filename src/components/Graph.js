@@ -17,7 +17,9 @@ const Graph = (props) => {
             symbol : props.overFlowInformation.displaySymbol,
             description : props.overFlowInformation.description,
             saved : true,
+            id : Date.now(),
         } 
+     
         props.addSecurity(obj)
     }
     return (
