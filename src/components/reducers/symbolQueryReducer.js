@@ -1,4 +1,4 @@
-import { CHANGE_SYMBOL, FETCHING_SECURITY_SUCCESS, IS_FETCHING_ERROR, IS_FETCHING_SECURITY, SET_TITLE, VIEW_SAVED_SECURITY } from "../actions/symbolQueryAction"
+import { CHANGE_SYMBOL, FETCHING_SECURITY_SUCCESS, IS_FETCHING_ERROR, IS_FETCHING_SECURITY, SEARCH_RESULTS, SET_TITLE, VIEW_SAVED_SECURITY } from "../actions/symbolQueryAction"
 import { API_KEY } from "../../@key/key";
 import { useSymbolState } from "../customHooks/useSymbolState";
 
@@ -12,17 +12,20 @@ const initialState = {
     savedSecurities : [],
     viewSavedSecurities : false,
     accountBalance : 100000,
-    title : ""
+    title : "",
+    filteredResults : "",
+    overFlowInformation : [],
 }
 
 export const symbolQuery = (state = initialState, action) => {
     switch(action.type) {
         case(CHANGE_SYMBOL) :
-            return({...state, symbolInQue : action.payload});
+        let parsed = JSON.parse(action.payload);
+        console.log(parsed)
+            return({...state, symbolInQue : parsed.displaySymbol, overFlowInformation : parsed});
         case(IS_FETCHING_SECURITY) :
             return({...state, isFetching : action.payload});
         case(IS_FETCHING_ERROR) :
-            
             return({...state, errorMessage : action.payload, isFetching : false});
         case(FETCHING_SECURITY_SUCCESS) :
             return({...state,
@@ -31,7 +34,9 @@ export const symbolQuery = (state = initialState, action) => {
         case(VIEW_SAVED_SECURITY) : 
             return({...state, viewSavedSecurities : !state.viewSavedSecurities});
         case(SET_TITLE) :
-            return({...state, title : action.payload})
+            return({...state, title : action.payload});
+        case(SEARCH_RESULTS) : 
+            return({...state, filteredResults : action.payload})
         default : 
             return(state);
     }

@@ -7,18 +7,20 @@ export const IS_FETCHING_ERROR = "IS_FETCHING_ERROR";
 export const FETCHING_SECURITY_SUCCESS = "FETCHING_SECURITY_SUCCESS"; 
 export const VIEW_SAVED_SECURITY = "VIEW_SAVED_SECURITY";
 export const SET_TITLE = 'SET_TITLE'; 
+export const SEARCH_RESULTS = "SEARCH_RESULTS";
 // /stock/candle?symbol=AAPL&resolution=1&from=1693493346&to=1693752546
 // /stock/metric?symbol=AAPL&metric=all
 
 //! /stock/price-target?symbol=DIS target 
 
-export const submitSearch = (symbolInQue) => dispatch => {
+export const submitSearch = (symbolInQue,title) => dispatch => {
     dispatch(isFetchingSecurity(true))
     axios.get(`https://finnhub.io/api/v1/quote?symbol=${symbolInQue}&token=${API_KEY}`)
     .then(res=> {
         // dispatch(setTitle(symbolInQue))
-        dispatch(fetchingSecuritySuccess(res.data))
         dispatch(isFetchingSecurity(false))
+        dispatch(fetchingSecuritySuccess(res.data))
+        dispatch(setTitle(title))
     })
     .catch(err=> dispatch(isFetchingError(err.message)))
 }
@@ -40,4 +42,7 @@ export const viewSavedSecurities = () => {
 }
 export const setTitle = (title) => {
     return{type : SET_TITLE, payload : title}
+}
+export const searchResults = (value) => {
+    return {type : SEARCH_RESULTS, payload : value}; 
 }

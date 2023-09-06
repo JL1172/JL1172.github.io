@@ -6,13 +6,9 @@ import { changeSymbol, setTitle, submitSearch } from "./actions/symbolQueryActio
 import { Button, Spinner } from "reactstrap";
 
 const Graph = (props) => {
-    const giveANewTitle = (symbol) => {
-        props.symbols.map(n => {
-            if (n.displaySymbol === symbol) {
-                props.setTitle(n.description)
-            }
-        })
-        props.submitSearch(symbol)
+    const giveANewTitle = (symbol,title) => {
+        console.log(title)
+        props.submitSearch(symbol,title)
     }
     return (
         <StyledGraph>
@@ -21,9 +17,9 @@ const Graph = (props) => {
                     {props.title && <h3>{props.title}</h3>}
                     <div id="graphs" style={{ display: "flex" }}>
                         <LineChart width={250} height={250} data={props.currentInformation}>
-                            <Line type="monotone" stroke="#8884d8" dataKey="c" />
+                            <Line type="monotone" stroke="#8884d8" dataKey="l" />
                             <CartesianGrid stroke="lightgray" strokeDasharray="5 5" />
-                            <XAxis dataKey="c" />
+                            <XAxis dataKey="l" />
                             <YAxis dataKey="" />
                             <Tooltip />
                         </LineChart>
@@ -49,14 +45,12 @@ const Graph = (props) => {
                             <div><span className="info">Percent Change: </span> {props.currentInformation[0].dp}%</div>
                         </div>
                     </div>}
-                    <select type="text" onChange={(e) => props.changeSymbol(e.target.value)} value={props.symbolInQue}>
-                        <option value="">Select Symbol To Search</option>
+                    <select type="text" onChange={(e) => props.changeSymbol(e.target.value)} value={props.symbolInQue.displaySymbol}>
                         {props.symbols.map((n, i) => {
-                            const ray = [n.displaySymbol, n.description];
-                            return <option key={i} value={n.displaySymbol}>{n.displaySymbol} {n.description}</option>
+                            return <option key={i} value={JSON.stringify(n)}>{n.displaySymbol} {n.description}</option>
                         })}
                     </select>
-                    <button onClick={() => giveANewTitle(props.symbolInQue)}>Search Security</button></main>
+                    <button onClick={() => giveANewTitle(props.symbolInQue,props.overFlowInformation.description)}>Search Security</button></main>
 
                 :
                 <Spinner style={{ width: "5rem", height: "5rem" }}
@@ -65,7 +59,6 @@ const Graph = (props) => {
                 >
                     {" "}
                 </Spinner>}
-
         </StyledGraph>
     )
 }
@@ -76,6 +69,7 @@ const mapStateToProps = state => {
         symbolInQue: state.symbolQueryReducer.symbolInQue,
         isFetching: state.symbolQueryReducer.isFetching,
         title: state.symbolQueryReducer.title,
+        overFlowInformation : state.symbolQueryReducer.overFlowInformation,
     }
 }
 
