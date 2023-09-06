@@ -17,6 +17,7 @@ const initialState = {
     overFlowInformation : [],
     hardFalse : false,
     secondaryQue : [],
+    favorited : false,
 }
 
 export const symbolQuery = (state = initialState, action) => {
@@ -31,7 +32,7 @@ export const symbolQuery = (state = initialState, action) => {
         case(FETCHING_SECURITY_SUCCESS) :
             return({...state,
                 currentSecurityInformation :
-                 [action.payload], hardFalse : false, filteredResults : "", secondaryQue : "", symbolInQue : ""}) //!symbolInQue
+                 [action.payload], hardFalse : false, filteredResults : "", secondaryQue : "", symbolInQue : "", favorited : false}) //!symbolInQue
         case(VIEW_SAVED_SECURITY) : 
             return({...state, viewSavedSecurities : !state.viewSavedSecurities});
         case(SET_TITLE) :
@@ -45,10 +46,10 @@ export const symbolQuery = (state = initialState, action) => {
        case(SAVE_SECURITY) :
                 let found = state.savedSecurities.find(n => n.symbol === action.payload.symbol);
                 if (!found) {
-                return({...state, savedSecurities : [...state.savedSecurities,action.payload]})
+                return({...state, savedSecurities : [...state.savedSecurities,action.payload], favorited : true})
                 }
         case(REMOVE) : 
-                return({...state, savedSecurities : state.savedSecurities.filter(n => n.id !== action.payload)})
+                return({...state, savedSecurities : state.savedSecurities.filter(n => n.id !== action.payload), favorited : false})
         default : 
             return(state);
     }

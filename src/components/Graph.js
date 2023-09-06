@@ -2,7 +2,7 @@ import { connect } from "react-redux"
 import React from "react"
 import { StyledGraph } from "./styled/styledComponents";
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip } from 'recharts';
-import { addSecurity, changeSymbol, setTitle, submitSearch } from "./actions/symbolQueryAction";
+import { addSecurity, changeSymbol, remove, setTitle, submitSearch } from "./actions/symbolQueryAction";
 import { Button, Spinner } from "reactstrap";
 
 const Graph = (props) => {
@@ -22,14 +22,26 @@ const Graph = (props) => {
      
         props.addSecurity(obj)
     }
+    const advancedRemove = () => {
+        let res2 = props.saved.map(n=> {
+            if (n.symbol === props.overFlowInformation.symbol) {
+                return n.id;
+            }
+        })
+        props.remove(res2[1])
+    }
     return (
         <StyledGraph>
             {!props.isFetching ?
                 <main id="main">
                     <div id="star">
+                        {!props.favorited ? 
                         <span style = {{ cursor : "pointer"}}onClick={()=> advancedAdd()} className="material-symbols-outlined">
-                            add_circle
-                        </span>
+                         add_circle
+                        </span> : 
+                        <span style = {{ cursor : "pointer"}}onClick={()=> advancedRemove()} className="material-symbols-outlined">
+                         remove
+                        </span>}
                     </div>
                     {props.title && <h3>{props.title}</h3>}
                     <div id="graphs" style={{ display: "flex" }}>
@@ -89,7 +101,9 @@ const mapStateToProps = state => {
         title: state.symbolQueryReducer.title,
         overFlowInformation: state.symbolQueryReducer.overFlowInformation,
         hardFalse: state.symbolQueryReducer.hardFalse,
+        favorited: state.symbolQueryReducer.favorited,
+        saved : state.symbolQueryReducer.savedSecurities,
     }
 }
 
-export default connect(mapStateToProps, { changeSymbol, submitSearch, setTitle, addSecurity })(Graph);
+export default connect(mapStateToProps, { changeSymbol, submitSearch, setTitle, addSecurity, remove })(Graph);
