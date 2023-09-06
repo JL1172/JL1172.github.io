@@ -1,4 +1,4 @@
-import { CHANGE_SYMBOL, FETCHING_SECURITY_SUCCESS, IS_FETCHING_ERROR, IS_FETCHING_SECURITY } from "../actions/symbolQueryAction"
+import { CHANGE_SYMBOL, FETCHING_SECURITY_SUCCESS, IS_FETCHING_ERROR, IS_FETCHING_SECURITY, VIEW_SAVED_SECURITY } from "../actions/symbolQueryAction"
 import { API_KEY } from "../../@key/key";
 import { useSymbolState } from "../customHooks/useSymbolState";
 
@@ -10,6 +10,7 @@ const initialState = {
     errorMessage : "",
     currentSecurityInformation : [],
     savedSecurities : [],
+    viewSavedSecurities : false,
     accountBalance : 100000,
 }
 
@@ -25,6 +26,8 @@ export const symbolQuery = (state = initialState, action) => {
             return({...state,
                  currentSecurityInformation :
                   [...state.currentSecurityInformation, action.payload], isFetching : false,  symbolInQue : ""})
+        case(VIEW_SAVED_SECURITY) : 
+            return({...state, viewSavedSecurities : !state.viewSavedSecurities});
         default : 
             return(state);
     }

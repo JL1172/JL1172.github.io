@@ -8,7 +8,7 @@ const Header = (props) => {
                 account_circle
             </span>Profile</div>
             <div id="accountBalance">
-                <span class="material-symbols-outlined">
+                <span className="material-symbols-outlined">
                     info
                 </span>
                 Account Balance : ${props.accountBalance}

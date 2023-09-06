@@ -5,6 +5,7 @@ export const SUBMIT_SEARCH = "SUBMIT_SEARCH";
 export const IS_FETCHING_SECURITY = "IS_FETCHING_SECURITY";
 export const IS_FETCHING_ERROR = "IS_FETCHING_ERROR";
 export const FETCHING_SECURITY_SUCCESS = "FETCHING_SECURITY_SUCCESS"; 
+export const VIEW_SAVED_SECURITY = "VIEW_SAVED_SECURITY";
 
 console.log(API_KEY)
 export const submitSearch = (symbolInQue) => dispatch => {
@@ -29,4 +30,7 @@ const isFetchingError = (errorMessage) => {
 }
 const fetchingSecuritySuccess = (information) => {
     return{type : FETCHING_SECURITY_SUCCESS, payload : information}
+}
+export const viewSavedSecurities = () => {
+    return{type : VIEW_SAVED_SECURITY}
 }
