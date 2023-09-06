@@ -2,28 +2,52 @@ import { connect } from "react-redux"
 import React from "react"
 import { StyledGraph } from "./styled/styledComponents";
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip } from 'recharts';
-import { changeSymbol } from "./actions/symbolQueryAction";
+import { changeSymbol, submitSearch } from "./actions/symbolQueryAction";
+import { Button, Spinner } from "reactstrap";
 
 const Graph = (props) => {
 
     return (
         <StyledGraph>
-            {/* <LineChart width={1000} height={300} data={props.currentInformation}>
-                <Line type="monotone" stroke="#8884d8" dataKey="value" />
-                <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-                <XAxis dataKey="date" />
-                <YAxis />
+            {!props.isFetching ? 
+            <>
+            {props.currentInformation.length > 0 && props.symbols.map(n => {
+                if (n.displaySymbol === props.currentInformation[0]) {
+                    return <h3>{n.description}</h3>
+                }
+                })}
+            <div style = {{display : "flex"}}>
+            <LineChart width={250} height={250} data={props.currentInformation}>
+                <Line type="monotone" stroke="#8884d8" dataKey="c" />
+                <CartesianGrid stroke="#fff" strokeDasharray="5 5" />
+                <XAxis dataKey="c" />
+                <YAxis dataKey= "" />
                 <Tooltip />
-            </LineChart> */}
-            <select type = "text" onChange={(e)=>props.changeSymbol(e.target.value)} value={props.symbolInQue}>
+            </LineChart>
+            <LineChart width={250} height={250} data={props.currentInformation}>
+                <Line type="monotone" stroke="#8884d8" dataKey="h" />
+                <CartesianGrid stroke="#fff" strokeDasharray="5 5" />
+                <XAxis dataKey="h" />
+                <YAxis dataKey= "" />
+                <Tooltip />
+            </LineChart>
+            </div>
+            <select type="text" onChange={(e) => props.changeSymbol(e.target.value)} value={props.symbolInQue}>
                 <option value="">Select Symbol To Search</option>
-                {props.symbols.map((n,i)=> {
-                    const obj = [
-                        n.description, n.displaySymbol,
-                    ]
-                    return <option key = {i} value = {obj}>{n.displaySymbol} {n.description}</option>
+                {props.symbols.map((n, i) => {
+                    const ray = [n.displaySymbol, n.description];
+                    return <option key={i} value= {n.displaySymbol}>{n.displaySymbol} {n.description}</option>
                 })}
             </select>
+            <button onClick={() => props.submitSearch(props.symbolInQue)}>Search Security</button></>
+        : 
+        <Spinner style = {{width : "5rem", height : "5rem"}}
+        className="m-5"
+        color="primary"
+      >
+        {" "}
+      </Spinner> }
+
         </StyledGraph>
     )
 }
@@ -31,8 +55,9 @@ const Graph = (props) => {
 const mapStateToProps = state => {
     return {
         currentInformation: state.symbolQueryReducer.currentSecurityInformation,
-        symbolInQue : state.symbolQueryReducer.symbolInQue,
+        symbolInQue: state.symbolQueryReducer.symbolInQue,
+        isFetching : state.symbolQueryReducer.isFetching,
     }
 }
 
-export default connect(mapStateToProps, {changeSymbol})(Graph);
+export default connect(mapStateToProps, { changeSymbol, submitSearch })(Graph);

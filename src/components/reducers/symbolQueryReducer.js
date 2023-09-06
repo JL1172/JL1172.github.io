@@ -5,7 +5,7 @@ import { useSymbolState } from "../customHooks/useSymbolState";
 
 
 const initialState = {
-    symbolInQue : "",
+    symbolInQue : [],
     isFetching : false,
     errorMessage : "",
     currentSecurityInformation : [],
@@ -17,7 +17,7 @@ const initialState = {
 export const symbolQuery = (state = initialState, action) => {
     switch(action.type) {
         case(CHANGE_SYMBOL) :
-        console.log(action.payload)
+        console.log(action.payload.split(" ")[0])
             return({...state, symbolInQue : action.payload});
         case(IS_FETCHING_SECURITY) :
             return({...state, isFetching : action.payload});
@@ -25,8 +25,8 @@ export const symbolQuery = (state = initialState, action) => {
             return({...state, errorMessage : action.payload});
         case(FETCHING_SECURITY_SUCCESS) :
             return({...state,
-                 currentSecurityInformation :
-                  [...state.currentSecurityInformation, action.payload], isFetching : false,  symbolInQue : ""})
+                currentSecurityInformation :
+                 [state.symbolInQue, action.payload], symbolInQue : ""})
         case(VIEW_SAVED_SECURITY) : 
             return({...state, viewSavedSecurities : !state.viewSavedSecurities});
         default : 
