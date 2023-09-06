@@ -2,20 +2,23 @@ import { connect } from "react-redux"
 import React from "react"
 import { StyledGraph } from "./styled/styledComponents";
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip } from 'recharts';
-import { changeSymbol, submitSearch } from "./actions/symbolQueryAction";
+import { changeSymbol, setTitle, submitSearch } from "./actions/symbolQueryAction";
 import { Button, Spinner } from "reactstrap";
 
 const Graph = (props) => {
-
+    const giveANewTitle = (symbol) => {
+        props.symbols.map(n=> {
+            if (n.displaySymbol === symbol) {
+                props.setTitle(n.description)
+            }
+        })
+        props.submitSearch(symbol)
+    }
     return (
         <StyledGraph>
             {!props.isFetching ? 
             <>
-            {props.currentInformation.length > 0 && props.symbols.map(n => {
-                if (n.displaySymbol === props.currentInformation[0]) {
-                    return <h3>{n.description}</h3>
-                }
-                })}
+           {props.title && props.title}
             <div style = {{display : "flex"}}>
             <LineChart width={250} height={250} data={props.currentInformation}>
                 <Line type="monotone" stroke="#8884d8" dataKey="c" />
@@ -39,7 +42,8 @@ const Graph = (props) => {
                     return <option key={i} value= {n.displaySymbol}>{n.displaySymbol} {n.description}</option>
                 })}
             </select>
-            <button onClick={() => props.submitSearch(props.symbolInQue)}>Search Security</button></>
+            <button onClick={() => giveANewTitle(props.symbolInQue)}>Search Security</button></>
+        
         : 
         <Spinner style = {{width : "5rem", height : "5rem"}}
         className="m-5"
@@ -47,7 +51,7 @@ const Graph = (props) => {
       >
         {" "}
       </Spinner> }
-
+        
         </StyledGraph>
     )
 }
@@ -57,7 +61,8 @@ const mapStateToProps = state => {
         currentInformation: state.symbolQueryReducer.currentSecurityInformation,
         symbolInQue: state.symbolQueryReducer.symbolInQue,
         isFetching : state.symbolQueryReducer.isFetching,
+        title : state.symbolQueryReducer.title,
     }
 }
 
-export default connect(mapStateToProps, { changeSymbol, submitSearch })(Graph);
+export default connect(mapStateToProps, { changeSymbol, submitSearch, setTitle })(Graph);
