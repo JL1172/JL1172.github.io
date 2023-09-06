@@ -40,6 +40,10 @@ body {
   justify-content: flex-end;
   margin-right: .5rem;
 }
+.hoverOver:hover {
+  text-decoration: underline;
+  color : lightblue;
+}
 
 
 
