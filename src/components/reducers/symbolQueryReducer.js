@@ -15,6 +15,7 @@ const initialState = {
     title : "",
     filteredResults : "",
     overFlowInformation : [],
+    hardFalse : false,
 }
 
 export const symbolQuery = (state = initialState, action) => {
@@ -30,13 +31,13 @@ export const symbolQuery = (state = initialState, action) => {
         case(FETCHING_SECURITY_SUCCESS) :
             return({...state,
                 currentSecurityInformation :
-                 [action.payload], symbolInQue : ""})
+                 [action.payload], symbolInQue : "", hardFalse : false})
         case(VIEW_SAVED_SECURITY) : 
             return({...state, viewSavedSecurities : !state.viewSavedSecurities});
         case(SET_TITLE) :
             return({...state, title : action.payload});
         case(SEARCH_RESULTS) : 
-            return({...state, filteredResults : action.payload})
+            return({...state, filteredResults : action.payload, hardFalse : true})
         default : 
             return(state);
     }

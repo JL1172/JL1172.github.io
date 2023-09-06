@@ -10,6 +10,7 @@ const Graph = (props) => {
         console.log(title)
         props.submitSearch(symbol,title)
     }
+    console.log(props.symbols)
     return (
         <StyledGraph>
             {!props.isFetching ?
@@ -46,8 +47,10 @@ const Graph = (props) => {
                         </div>
                     </div>}
                     <select type="text" onChange={(e) => props.changeSymbol(e.target.value)} value={props.symbolInQue.displaySymbol}>
+                        <option value = "">select</option>
                         {props.symbols.map((n, i) => {
-                            return <option key={i} value={JSON.stringify(n)}>{n.displaySymbol} {n.description}</option>
+                            console.log(n)
+                            return <option key={i} value={JSON.stringify(n)}>{props.hardFalse ? `${n}` : `${n.displaySymbol} ${n.description}`}</option>
                         })}
                     </select>
                     <button onClick={() => giveANewTitle(props.symbolInQue,props.overFlowInformation.description)}>Search Security</button></main>
@@ -70,6 +73,7 @@ const mapStateToProps = state => {
         isFetching: state.symbolQueryReducer.isFetching,
         title: state.symbolQueryReducer.title,
         overFlowInformation : state.symbolQueryReducer.overFlowInformation,
+        hardFalse : state.symbolQueryReducer.hardFalse,
     }
 }
 

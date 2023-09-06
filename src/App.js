@@ -14,11 +14,15 @@ function App(props) {
   const filteredList = () => {
     let lookUp = props.filteredResults.trim().toLowerCase();
     if (!lookUp) return symbols;
-    return symbols.filter((n,i)=> {
-      let reg = new RegExp(lookUp)
-      if (reg.test(Object.values(n))) {
-        return n;
-      }
+    let symbolDescriptions = [];
+    let res = symbols.map((n,i)=> {
+      symbolDescriptions.push(n.description);
+    })
+    return symbolDescriptions.filter((n,i)=> {
+        if(n.toLowerCase().includes(lookUp)) {
+          let index = symbolDescriptions.findIndex(item => item.toLowerCase() == n.toLowerCase())
+          return symbols.at(index);
+        }
     })
   }
   return (
