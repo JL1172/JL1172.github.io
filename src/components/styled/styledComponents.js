@@ -31,9 +31,30 @@ const h4kf = keyframes`
     opacity : 1;
 }
 `
+
+const rotate = keyframes`
+0% {
+    transform : translateX(0rem);
+    opacity : 1;
+}
+100% {
+    transform : translateX(50rem);
+}
+`
+
 export const StyledDiv = styled.div`
 display : flex;
 height : 100vh;
+#rotating {
+    animation : ${rotate} 30s ease-in-out infinite;
+    color : lightblue;
+    position : absolute;
+    top : 0;
+    left : -50rem;
+    div {
+        margin-right : .5rem;
+}
+}
 `
 
 export const Saved = styled.div`

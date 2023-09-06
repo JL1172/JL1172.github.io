@@ -8,9 +8,9 @@ const Header = (props) => {
             <div id="profile"><span className="material-symbols-outlined">
                 account_circle
             </span>Profile</div>
-            <div>
-                <input id = "search" type = "text" value = {props.filteredResults} onChange={(e)=> props.searchResults(e.target.value)} />
-                <select onChange = {(e)=> props.thirdSearch(e.target.value)} value = {props.symbols.description} disabled = {false}>
+            <div id = "rotating" style = {{display : "flex"}}>
+                {/* <input id = "search" type = "text" value = {props.filteredResults} onChange={(e)=> props.searchResults(e.target.value)} />
+                <select onChange = {(e)=> props.thirdSearch(e.target.value)} value = {props.symbols} disabled = {false}>
                     {props.symbols.length === 1 ? <option value = ""></option> : "" }
                     {props.symbols.map((n,i)=> {
                         return <option 
@@ -18,7 +18,12 @@ const Header = (props) => {
                          key = {i}>{n.description}</option>
                     })}
                 </select>
-                <button disabled = {!props.hardFalse} onClick={()=> props.submitSearch(props.secondaryQue.displaySymbol, props.secondaryQue.description)}>Fetch Data</button>
+                <button disabled = {!props.hardFalse} onClick={()=> props.submitSearch(props.secondaryQue.displaySymbol, props.secondaryQue.description)}>Fetch Data</button> */}
+                {props.symbols.map((n,i)=> {
+                    if (i < 100) {
+                    return <div key = {i}>{n.displaySymbol}</div>
+                    }
+                })}
             </div>
             <div id="accountBalance">
                 <span className="material-symbols-outlined">

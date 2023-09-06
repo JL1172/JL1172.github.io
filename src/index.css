@@ -16,7 +16,7 @@ body {
   border-bottom: 4px solid rgb(80, 94, 138);
   color : white;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-around;
   position: absolute;
   z-index: 3;

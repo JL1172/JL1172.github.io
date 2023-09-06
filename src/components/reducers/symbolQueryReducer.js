@@ -42,10 +42,11 @@ export const symbolQuery = (state = initialState, action) => {
         case(THIRD_SEARCH) :
         let newParse = JSON.parse(action.payload)
             return({...state, secondaryQue :
-                 {description : newParse.description, displaySymbol : newParse.displaySymbol}, hardFalse : true})
+                 {description : newParse.description, displaySymbol : newParse.displaySymbol, title : newParse.description}, hardFalse : true})
        case(SAVE_SECURITY) :
-                let found = state.savedSecurities.find(n => n.symbol === action.payload.symbol);
-                if (!found) {
+       console.log(action.payload)
+       console.log(state.savedSecurities)
+                if (!state.savedSecurities.find(n => n.symbol === action.payload.symbol)) {
                 return({...state, savedSecurities : [...state.savedSecurities,action.payload], favorited : true})
                 }
         case(REMOVE) : 

@@ -14,9 +14,9 @@ const SavedStocks = (props) => {
                     </span></h4>
                 </div>
                 {props.savedSecurities.length > 0 && props.savedSecurities.map((n, i) => {
-                    return <div className="savedAllOfThese" >
+                    return <div key = {Date.now()*Math.random()*13920} className="savedAllOfThese" >
                         <div className="hoverOver" onClick = {()=> props.submitSearch(n.symbol, n.title)} key={i}>{n.saved && n.title}</div>
-                        <span style={{ cursor: "pointer" }}
+                        <span  key = {Date.now()*Math.random()*13920} style={{ cursor: "pointer" }}
                             onClick={() => props.remove(n.id)}
                             className="material-symbols-outlined">
                             delete
