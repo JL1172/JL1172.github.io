@@ -18,7 +18,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  position: fixed;
+  position: absolute;
+  z-index: 3;
 }
 #profile {
   display: flex;
