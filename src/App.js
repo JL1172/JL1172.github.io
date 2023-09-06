@@ -18,7 +18,6 @@ function App(props) {
     let res = symbols.map(n=> {
       parent.push({description : n.description, displaySymbol : n.displaySymbol})
     })
-    console.log(parent)
     if (!term) return parent;
     else {
     return parent.filter((n,i)=> {

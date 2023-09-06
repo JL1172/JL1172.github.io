@@ -42,8 +42,10 @@ background-color: #16223a;
   border-right: 4px solid rgb(80, 94, 138);
   height : 100%;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
+  flex-direction : column;
   align-items: flex-start;
+
 #quick {
     display: flex;
     opacity : 0;
@@ -76,6 +78,22 @@ ${props =>
     animation : ${kf} 1s ease-in-out forwards;
     `
     }
+.savedAllOfThese {
+    margin-top : 1rem;
+    display : flex;
+    justify-content: space-between;
+    opacity : 0;
+    color : white;
+    ${props =>
+        props.viewSaved &&
+        css`
+    animation : ${h4kf} .5s ease-in-out forwards;
+    animation-delay : 1.2s;
+    `
+    }
+    width : 95%;
+    border-bottom : 2px solid rgb(80, 94, 138);
+}
 
 `
 

@@ -9,6 +9,7 @@ export const VIEW_SAVED_SECURITY = "VIEW_SAVED_SECURITY";
 export const SET_TITLE = 'SET_TITLE'; 
 export const SEARCH_RESULTS = "SEARCH_RESULTS";
 export const THIRD_SEARCH = "THIRD_SEARCH"; 
+export const SAVE_SECURITY = "SAVE_SECURITY";
 // /stock/candle?symbol=AAPL&resolution=1&from=1693493346&to=1693752546
 // /stock/metric?symbol=AAPL&metric=all
 
@@ -49,4 +50,7 @@ export const searchResults = (value) => {
 }
 export const thirdSearch = (value) => {
     return {type : THIRD_SEARCH, payload : value}; 
+}
+export const addSecurity = (stock) => {
+    return{type : SAVE_SECURITY, payload : stock}
 }

@@ -4,6 +4,7 @@ import { Saved, chevronRight, chevronLeft } from "./styled/styledComponents";
 import { viewSavedSecurities } from "./actions/symbolQueryAction";
 
 const SavedStocks = (props) => {
+    
     return (
         <>
             <Saved viewSaved={props.viewSaved} id="saved">
@@ -11,9 +12,9 @@ const SavedStocks = (props) => {
                     <h4 >My Securities<span className="material-symbols-outlined">
                         finance_chip
                     </span></h4>
-                </div>
+                    </div>
                 {props.savedSecurities.length > 0 && props.savedSecurities.map((n, i) => {
-                    return <div key={i}>{n.symbol}</div>
+                    return <div className = "savedAllOfThese" key={i}>{n.title}</div>
                 })}
             </Saved>
             <span onClick={() => props.viewSavedSecurities()} 

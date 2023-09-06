@@ -1,4 +1,4 @@
-import { CHANGE_SYMBOL, FETCHING_SECURITY_SUCCESS, IS_FETCHING_ERROR, IS_FETCHING_SECURITY, SEARCH_RESULTS, SET_TITLE, THIRD_SEARCH, VIEW_SAVED_SECURITY } from "../actions/symbolQueryAction"
+import { CHANGE_SYMBOL, FETCHING_SECURITY_SUCCESS, IS_FETCHING_ERROR, IS_FETCHING_SECURITY, SAVE_SECURITY, SEARCH_RESULTS, SET_TITLE, THIRD_SEARCH, VIEW_SAVED_SECURITY } from "../actions/symbolQueryAction"
 import { API_KEY } from "../../@key/key";
 import { useSymbolState } from "../customHooks/useSymbolState";
 
@@ -40,9 +40,14 @@ export const symbolQuery = (state = initialState, action) => {
             return({...state, filteredResults : action.payload, secondaryQue : "", hardFalse : false})
         case(THIRD_SEARCH) :
         let newParse = JSON.parse(action.payload)
-        console.log(newParse)
             return({...state, secondaryQue :
                  {description : newParse.description, displaySymbol : newParse.displaySymbol}, hardFalse : true})
+       case(SAVE_SECURITY) :
+            if (state.savedSecurities.filter(n => n.symbol === action.payload.symbol).length > 0) {
+                return({...state,savedSecurities : state.savedSecurities.filter((n,i) => n.symbol !== action.payload.symbol )})
+            } else {
+            return({...state, savedSecurities : [...state.savedSecurities, action.payload]})
+            }
         default : 
             return(state);
     }
