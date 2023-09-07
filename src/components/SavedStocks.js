@@ -20,7 +20,7 @@ const advancedCompare = (sym,title,cpwb,overFlow,shares) => {
                     <h4 >My Watch List</h4>
                     <Form>
                     <FormGroup switch>
-                        <Input onClick={()=> props.hoverOver()} type = "switch" checked = {props.viewPercentChange} />
+                        <Input  readOnly onClick={()=> props.hoverOver()} type = "switch" checked = {props.viewPercentChange} />
                     </FormGroup>
                     </Form>
                     <span className="material-symbols-outlined">

@@ -55,6 +55,7 @@ const rotate = keyframes`
 
 export const StyledDiv = styled.div`
 display : flex;
+background-color  : lightgray;
 height : 120vh;
 .rotating {
     animation : ${rotate} 4s ease-in-out forwards;
@@ -322,19 +323,40 @@ export const StyledForm = styled.div`
 export const StyledReconciliation = styled.div`
   width : 50rem;
     display : flex;
-    flex-direction : column;
     align-items : center;
     justify-content : center;
+    background-color : lightgray;
+    #container {
+        height : 40vh;
+    }
+    #closeButton {
+        width : 40rem;
+        display : flex;
+        justify-content : flex-end;
+    }
     div {
         animation : ${kf5} 2s ease-in-out forwards;
         background-color : white;
-        display : flex;
-        flex-direction : column;
         width : 40rem;
-        justify-content : center;
+        flex-direction : row;
+        justify-content : space-around;
         align-items : center;
-        padding : 3rem;
         border-radius : 15px;
         box-shadow : 0 0 2em white;
+        #gains {
+            height :15rem;
+        }
+        .spreadOut {
+                margin-bottom : 1rem;
+
+            }
+        #secondGain {
+            display : flex;
+            justify-content : space-evenly;
+            align-items : baseline;
+           .even { 
+            margin-top : 1rem;
+           }
+        }
     }
 `

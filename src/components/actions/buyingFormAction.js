@@ -6,6 +6,7 @@ export const SUBMIT_PURCHASE = "SUBMIT_PURCHASE";
 export const CONFIRMATION_MESSAGE = "CONFIRMATION_MESSAGE";
 export const RECTIFY_POSITIONS= "RECTIFY_POSITIONS";  
 export const FETCHING_INFORMATION = "FETCHING_INFORMATION";   
+export const PAGE_IS_VISIBLE = "PAGE_IS_VISIBLE";
 
 export const flipPage = () => {
     return{type : FLIP_PAGE}
@@ -25,6 +26,7 @@ export const confirmationMessage = (title) => {
 
 export const compareDifference = (symbol,oldPriceData,overflow, shares) => dispatch => {
     dispatch(fetchingInformation(true))
+    dispatch(makePageVisibile(true));
     axios.get(`https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${API_KEY}`)
     .then(res=> {
         dispatch(rectifyPositions(oldPriceData,res.data,overflow, shares))
@@ -32,11 +34,13 @@ export const compareDifference = (symbol,oldPriceData,overflow, shares) => dispa
     })
 }
 
-const fetchingInformation = (bool) => {
+export const fetchingInformation = (bool) => {
     return{type  :FETCHING_INFORMATION, payload : bool};
 }
 
 const rectifyPositions = (oldData,newData,overflow, shares) => {
     return{type : RECTIFY_POSITIONS, payload : [oldData,newData,overflow, shares]}; 
 }
-
+export const makePageVisibile = (bool) => {
+    return{type : PAGE_IS_VISIBLE, payload : bool}
+}

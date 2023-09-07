@@ -5,7 +5,7 @@ import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip } from 'recharts'
 import { addSecurity, changeSymbol, remove, setTitle, submitSearch } from "./actions/symbolQueryAction";
 import { Button, Spinner } from "reactstrap";
 import BuyingOption from "./BuyingOption";
-import { flipPage } from "./actions/buyingFormAction";
+import { fetchingInformation, flipPage, makePageVisibile } from "./actions/buyingFormAction";
 
 const Graph = (props) => {
     const giveANewTitle = (symbol, title) => {
@@ -91,36 +91,43 @@ const Graph = (props) => {
                         </Spinner>}
                 </StyledGraph>}
             <StyledReconciliation>
-                {props.isFetching ?
-                    <Spinner style={{ width: "5rem", height: "5rem" }}
-                        className="m-5"
-                        color="primary"
-                    >
-                        {" "}
-                    </Spinner> :
-                    <div>
-                        {props.stockReconciliation.length > 0 && <>
-                            <h2>{props.stockReconciliation[0].name}</h2>
-                            <h4>{props.stockReconciliation[0].symbol}</h4>
-                            <div style={{ display: "flex", flexDirection: "column" }}>
-                                <span>Current Price : {props.stockReconciliation[0].currentPrice.toFixed(2)}</span>
-                                <span>Price When Bought : {props.stockReconciliation[0].priceWhenBought.toFixed(2)}</span>
-                                <span>Total shares : {props.stockReconciliation[0].shares}</span>
-                                <div style={{ display: "flex", flexDirection: "row" }}>
-                                    <span>{props.stockReconciliation[0].computations.difference < 0 ? "Total Loss"
-                                        : props.stockReconciliation[0].computations.difference > 0 ? "Total Gain" : "No change"}</span>
-                                    <span className={props.stockReconciliation[0].computations.difference > 0 ? "pcGreen material-symbols-outlined" :
-                                        props.stockReconciliation[0].computations.difference < 0 ? "pcRed material-symbols-outlined" : "pcNeutral material-symbols-outlined"
-                                    }>
-                                        {props.stockReconciliation[0].computations.difference < 0 ? "trending_down" :
-                                            props.stockReconciliation[0].computations.difference > 0 ? "trending_up" : "trending_flat"}
-                                    </span>
-                                </div>
-                                <span>{props.stockReconciliation[0].computations.difference}</span>
+                {!props.pageIsVisible ? "" : <>
+                    {props.isFetching1 ?
+                        <Spinner style={{ width: "5rem", height: "5rem" }}
+                            className="m-5"
+                            color="primary"
+                        >
+                            {" "}
+                        </Spinner> :
+                        <div id="container">
+                            <div id="closeButton">
+                                <span style={{ cursor: "pointer" }} onClick={() => props.makePageVisibile(false)} className="material-symbols-outlined">
+                                    close
+                                </span>
                             </div>
-                        </>}
-                    </div>
-                }
+                            {props.stockReconciliation.length > 0 && <>
+                                <h2>{props.stockReconciliation[0].name}</h2>
+                                <h4>{props.stockReconciliation[0].symbol}</h4>
+                                <div id="gains" style={{ display: "flex", flexDirection: "column" }}>
+                                    <span className="spreadOut">Current Price : {props.stockReconciliation[0].currentPrice.toFixed(2)}</span>
+                                    <span className="spreadOut">Price When Bought : {props.stockReconciliation[0].priceWhenBought.toFixed(2)}</span>
+                                    <span className="spreadOut">Total shares : {props.stockReconciliation[0].shares}</span>
+                                    <div id="secondGain" style={{ display: "flex", flexDirection: "row" }}>
+                                        <span className="even">{props.stockReconciliation[0].computations.difference < 0 ? "Total Loss"
+                                            : props.stockReconciliation[0].computations.difference > 0 ? "Total Gain" : "No change"}
+                                            <span className={props.stockReconciliation[0].computations.difference > 0 ? "chart pcGreen material-symbols-outlined" :
+                                                props.stockReconciliation[0].computations.difference < 0 ? "chart pcRed material-symbols-outlined" : " chart pcNeutral material-symbols-outlined"
+                                            }>
+                                                {props.stockReconciliation[0].computations.difference < 0 ? "trending_down" :
+                                                    props.stockReconciliation[0].computations.difference > 0 ? "trending_up" : "trending_flat"}
+                                            </span></span>
+                                        <span className="even">${props.stockReconciliation[0].computations.difference}</span>
+                                        <span className="even">{props.stockReconciliation[0].computations.percentageDifference}%</span>
+                                    </div>
+                                </div>
+                            </>}
+                        </div>
+                    }</>}
             </StyledReconciliation>
         </>
     )
@@ -139,11 +146,12 @@ const mapStateToProps = state => {
         symbolData: state.crypto.symbolsData,
         flipOver: state.buyingForm.flipPage,
 
-        isFetching: state.buyingForm.isFetching,
+        isFetching1: state.buyingForm.isFetching,
 
         stockReconciliation: state.buyingForm.stockReconciliation,
+        pageIsVisible: state.buyingForm.pageIsVisible,
 
     }
 }
 
-export default connect(mapStateToProps, { changeSymbol, submitSearch, setTitle, addSecurity, remove, flipPage })(Graph);
+export default connect(mapStateToProps, { changeSymbol, submitSearch, setTitle, addSecurity, remove, flipPage, makePageVisibile })(Graph);

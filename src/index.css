@@ -52,7 +52,7 @@ body {
   background-color: red;
   border-radius: 10px;
   min-width: 3rem;
-  max-height: 1.5rem;
+  max-height: 2rem;
   max-width: fit-content;
 }
 
@@ -61,6 +61,7 @@ body {
   border-radius: 10px;
   min-width: 3rem;
   max-width: fit-content;
+  max-height: 2rem;
 }
 
 .pcNeutral {
@@ -68,6 +69,7 @@ body {
   border-radius: 10px;
   min-width: 3rem;
   max-width: fit-content;
+  max-height: 2rem;
 }
 
 .invisibile {
