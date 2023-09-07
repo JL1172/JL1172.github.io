@@ -5,19 +5,25 @@ import { searchResults, submitSearch, thirdSearch } from "./actions/symbolQueryA
 const Header = (props) => {
     return (
         <div id="header">
-            <div id="profile"><span className="material-symbols-outlined">
+            <div className="profile"><span className="material-symbols-outlined">
                 account_circle
             </span>Profile</div>
-            <div className = "rotating" style = {{display : "flex"}}>
-                {props.crypto.map((n,i)=> {
-                    return <span key = {n.id}>{n.name} <b>${n.current_price}</b></span>
+            <div className="rotating" style={{ display: "flex" }}>
+                {props.crypto.map((n, i) => {
+                    return <span key={n.id}>{n.name} <b>${n.current_price}</b></span>
                 })}
             </div>
-            <div id="accountBalance">
+            <div className="profile">
                 <span className="material-symbols-outlined">
                     info
                 </span>
-                Account Balance : ${props.accountBalance}
+                Cash Balance : ${props.accountBalance}
+            </div>
+            <div className="profile">
+                <span className="material-symbols-outlined">
+                    account_balance
+                </span>
+                Total Equity : %{ }
             </div>
         </div>
     )
@@ -26,11 +32,11 @@ const Header = (props) => {
 const mapStateToProps = state => {
     return {
         accountBalance: state.buyingForm.accountBalance,
-        filteredResults : state.symbolQueryReducer.filteredResults,
-        secondaryQue : state.symbolQueryReducer.secondaryQue, 
-        hardFalse : state.symbolQueryReducer.hardFalse,
-        crypto : state.crypto.cryptoData,
+        filteredResults: state.symbolQueryReducer.filteredResults,
+        secondaryQue: state.symbolQueryReducer.secondaryQue,
+        hardFalse: state.symbolQueryReducer.hardFalse,
+        crypto: state.crypto.cryptoData,
     }
 }
 
-export default connect(mapStateToProps, {searchResults, thirdSearch, submitSearch})(Header);
+export default connect(mapStateToProps, { searchResults, thirdSearch, submitSearch })(Header);

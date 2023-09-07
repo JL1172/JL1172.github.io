@@ -86,7 +86,7 @@ background-color: #16223a;
   flex-direction : column;
   align-items: flex-start;
     margin-top : 1rem;
-#quick {
+.quick {
     display: flex;
     opacity : 0;
   margin-top: 8rem;

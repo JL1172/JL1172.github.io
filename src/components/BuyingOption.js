@@ -14,8 +14,9 @@ const BuyingForm = (props) => {
             symbol: props.overFlowInformation.displaySymbol,
             title: props.overFlowInformation.description,
             overFlowInformation: props.overFlowInformation,
+            id : Date.now(),
         }
-        props.submitPurchase();
+        props.submitPurchase(obj);
     }
     const confirmPurchase = e => {
         e.preventDefault();

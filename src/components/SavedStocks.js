@@ -8,7 +8,7 @@ const SavedStocks = (props) => {
     return (
         <>
             <Saved viewSaved={props.viewSaved} id="saved">
-                <div id="quick">
+                <div className="quick">
                     <h4 >My Watch List<span className="material-symbols-outlined">
                         finance_chip
                     </span></h4>
@@ -24,6 +24,9 @@ const SavedStocks = (props) => {
                         </span>
                     </div>
                 })}
+                <div className="quick">
+                    <h4>My portfolio</h4>
+                </div>
             </Saved>
             <span onClick={() => props.viewSavedSecurities()}
                 style={{ backgroundColor: "lightgray", zIndex : "6", marginTop: "8rem", cursor: 'pointer', transition: ".3s ease-in-out" }}

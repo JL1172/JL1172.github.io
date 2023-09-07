@@ -11,8 +11,8 @@ export const changeShareFormValue = (value,pps) => {
     return{type : CHANGE_SHARE_FORM_VALUE, payload : [value,pps]}
 }
 
-export const submitPurchase = (total,stockPurchaseInformation) => {
-    return{type : SUBMIT_PURCHASE, payload : [stockPurchaseInformation,total]}
+export const submitPurchase = (stockPurchaseInformation) => {
+    return{type : SUBMIT_PURCHASE, payload : [stockPurchaseInformation]}
 }
 
 export const confirmationMessage = (title) => {
