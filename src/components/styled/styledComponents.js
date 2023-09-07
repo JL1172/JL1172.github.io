@@ -276,9 +276,10 @@ export const StyledForm = styled.div`
     }}
             main {
                 margin-bottom : 1rem;
-                width : 35rem;
+                width : 40rem;
                 display : flex;
-                justify-content : space-between;
+                justify-content : space-evenly;
+                align-items  :center;
                 input {
                     border : 2px solid rgb(142, 159, 211);
                     transition : .1s ease-in-out;
