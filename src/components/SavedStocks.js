@@ -1,33 +1,43 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Saved, chevronRight, chevronLeft } from "./styled/styledComponents";
-import { addSecurity, remove, submitSearch, viewSavedSecurities } from "./actions/symbolQueryAction";
+import { addSecurity, hoverOver, remove, submitSearch, viewSavedSecurities } from "./actions/symbolQueryAction";
 import { combineReducers } from "redux";
 import { compareDifference } from "./actions/buyingFormAction";
+import Reactstrap, { Form,FormGroup,Input } from "reactstrap";
+
 
 const SavedStocks = (props) => {
 const advancedCompare = (sym,title,cpwb,overFlow,shares) => {
     props.submitSearch(sym,title)
     props.compareDifference(sym,cpwb,overFlow,shares)
 }
+
     return (
         <>
             <Saved viewSaved={props.viewSaved} id="saved">
                 <div className="quick">
                     <h4 >My Watch List</h4>
+                    <Form>
+                    <FormGroup switch>
+                        <Input onClick={()=> props.hoverOver()} type = "switch" checked = {props.viewPercentChange} />
+                    </FormGroup>
+                    </Form>
                     <span className="material-symbols-outlined">
                         finance_chip
                     </span>
                 </div>
                 {props.savedSecurities.length > 0 && props.savedSecurities.map((n, i) => {
                     return <div key={i} className="savedAllOfThese" >
-                        <div className="hoverOver" onClick={() => props.submitSearch(n.symbol, n.title)} key={i}>{n.saved && n.title}</div>
-                        <span 
+                        <div className="hoverOver" 
+                        onClick={() => props.submitSearch(n.symbol, n.title)} key={i}>{n.saved && n.title}</div>
+                        <span  id = "chartPeek"
                         className= 
                         {n.percentChange > 0 ? "pcGreen material-symbols-outlined" 
-                        : n.percentChange < 0 ? "pcRed material-symbols-outlined" : "pcNeutral material-symbols-outlined"}>
+                        : n.percentChange < 0 ? "pcRed material-symbols-outlined" : "pcNeutral material-symbols-outlined"}
+                        >
                             {n.percentChange > 0 ? "trending_up" : n.percentChange < 0 ? "trending_down" : "trending_flat" }</span>
-                        <span>{n.percentChange}%</span>
+                        <span className={props.viewPercentChange ? "" : "invisible"}>{n.percentChange}%</span>
                         <span key={1273} style={{ cursor: "pointer" }}
                             onClick={() => props.remove(n.id)}
                             className="material-symbols-outlined">
@@ -68,6 +78,7 @@ const mapStateToProps = (state) => {
         title: state.symbolQueryReducer.title,
         overFlowInformation: state.symbolQueryReducer.overFlowInformation,
         hardFalse: state.symbolQueryReducer.hardFalse,
+        viewPercentChange : state.symbolQueryReducer.viewPercentChange,
 
         stockInformation : state.buyingForm.stockInformation,
         isFetching : state.buyingForm.isFetching,
@@ -75,4 +86,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { viewSavedSecurities, remove, submitSearch, compareDifference })(SavedStocks)
+export default connect(mapStateToProps, { viewSavedSecurities, remove, submitSearch, compareDifference, hoverOver })(SavedStocks)

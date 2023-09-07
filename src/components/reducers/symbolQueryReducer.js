@@ -1,4 +1,4 @@
-import { CHANGE_SYMBOL, FETCHING_SECURITY_SUCCESS, IS_FETCHING_ERROR, IS_FETCHING_SECURITY, REMOVE, SAVE_SECURITY, SEARCH_RESULTS, SET_TITLE, THIRD_SEARCH, VIEW_SAVED_SECURITY } from "../actions/symbolQueryAction"
+import { CHANGE_SYMBOL, FETCHING_SECURITY_SUCCESS, HOVER_OVER, IS_FETCHING_ERROR, IS_FETCHING_SECURITY, REMOVE, SAVE_SECURITY, SEARCH_RESULTS, SET_TITLE, THIRD_SEARCH, VIEW_SAVED_SECURITY } from "../actions/symbolQueryAction"
 import { API_KEY } from "../../@key/key";
 import { useSymbolState } from "../customHooks/useSymbolState";
 
@@ -17,6 +17,8 @@ const initialState = {
     hardFalse : false,
     secondaryQue : [],
     favorited : false,
+
+    viewPercentChange : false,
 }
 
 export const symbolQuery = (state = initialState, action) => {
@@ -43,7 +45,9 @@ export const symbolQuery = (state = initialState, action) => {
                 }
         case(REMOVE) : 
                 return({...state, savedSecurities : state.savedSecurities.filter(n => n.id !== action.payload), favorited : false})
-        default : 
+        case(HOVER_OVER) :
+                return({...state, viewPercentChange : !state.viewPercentChange})
+                default : 
             return(state);
     }
 }

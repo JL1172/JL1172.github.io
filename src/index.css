@@ -52,6 +52,7 @@ body {
   background-color: red;
   border-radius: 10px;
   min-width: 3rem;
+  max-height: 1.5rem;
   max-width: fit-content;
 }
 
@@ -69,6 +70,9 @@ body {
   max-width: fit-content;
 }
 
+.invisibile {
+  opacity: 0;
+}
 
 
 
