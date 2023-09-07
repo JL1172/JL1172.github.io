@@ -312,3 +312,26 @@ export const StyledForm = styled.div`
     }
 
 `
+
+export const StyledReconciliation = styled.div`
+  width : 50rem;
+    background-color : lightgray;
+    height : 100vh;
+    display : flex;
+    flex-direction : column;
+    align-items : center;
+    justify-content : center;
+    div {
+        margin-top  :6rem;
+        animation : ${kf5} 2s ease-in-out forwards;
+        background-color : white;
+        display : flex;
+        flex-direction : column;
+        width : 40rem;
+        justify-content : center;
+        align-items : center;
+        padding : 3rem;
+        border-radius : 15px;
+        box-shadow : 0 0 2em white;
+    }
+`

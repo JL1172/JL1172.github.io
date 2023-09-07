@@ -1,6 +1,6 @@
 import { connect } from "react-redux"
 import React from "react"
-import { StyledForm, StyledGraph } from "./styled/styledComponents";
+import { StyledForm, StyledGraph, StyledReconciliation } from "./styled/styledComponents";
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip } from 'recharts';
 import { addSecurity, changeSymbol, remove, setTitle, submitSearch } from "./actions/symbolQueryAction";
 import { Button, Spinner } from "reactstrap";
@@ -90,6 +90,19 @@ const Graph = (props) => {
                             {" "}
                         </Spinner>}
                 </StyledGraph>}
+            <StyledReconciliation>
+                {props.isFetching ?
+                    <Spinner style={{ width: "5rem", height: "5rem" }}
+                        className="m-5"
+                        color="primary"
+                    >
+                        {" "}
+                    </Spinner> :
+                    <div>
+                        data
+                    </div>
+                }
+            </StyledReconciliation>
         </>
     )
 }
