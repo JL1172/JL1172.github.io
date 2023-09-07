@@ -190,7 +190,7 @@ export const StyledGraph = styled.div`
 
 export const StyledForm = styled.div`
     width : 50rem;
-    margin-top : 6rem;
+    margin-top : 10rem;
     background-color : lightgray;
     height : 100vh;
     display : flex;
@@ -234,13 +234,14 @@ export const StyledForm = styled.div`
             margin-bottom : 4rem;
             background-color : rgb(142, 159, 211);
         }
-        p {
-            margin-top : 2rem;
+        #footer {
+            margin-top  : 5rem;
+            margin-bottom : -4rem;
         }
         form {
             border-top : 2px solid rgb(80, 94, 138);
             padding-top : 2rem;
-            margin-top : 5rem;
+            margin-top : 3rem;
             display : flex;
             flex-direction : column;
             margin-bottom : 6rem;
