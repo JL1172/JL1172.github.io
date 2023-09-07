@@ -41,7 +41,7 @@ const Graph = (props) => {
                                     add_circle
                                 </span> : ""}
                         </div>
-                        {props.title && <h3>{props.title} <b>{props.currentInformation[0].c}</b></h3>}
+                        {props.title && <h3>{props.title} <b>${props.currentInformation[0].c}</b></h3>}
                         <div id="graphs" style={{ display: "flex" }}>
                             <LineChart width={250} height={250} data={props.currentInformation}>
                                 <Line type="monotone" stroke="#8884d8" dataKey="l" />

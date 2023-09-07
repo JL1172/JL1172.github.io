@@ -3,6 +3,16 @@ import styled, { keyframes, css } from "styled-components";
 export const chevronRight = "https://cdn-icons-png.flaticon.com/512/120/120893.png";
 export const chevronLeft = "https://creazilla-store.fra1.digitaloceanspaces.com/icons/3271868/chevron-left-icon-md.png";
 
+
+const kf5 = keyframes`
+0% {
+opacity : 0;
+}
+100% {
+    opacity : 1;
+}
+`
+
 const kf = keyframes`
 0% {
     transform : translateX(-1rem);
@@ -45,7 +55,7 @@ const rotate = keyframes`
 
 export const StyledDiv = styled.div`
 display : flex;
-height : 100vh;
+height : 120vh;
 .rotating {
     animation : ${rotate} 4s ease-in-out forwards;
     color : lightblue;
@@ -124,7 +134,8 @@ export const StyledGraph = styled.div`
     align-items : center;
     justify-content : center;
     #main {
-        margin-top  :5rem;
+        margin-top  :6rem;
+        animation : ${kf5} 2s ease-in-out forwards;
         background-color : white;
         display : flex;
         flex-direction : column;
@@ -166,26 +177,25 @@ export const StyledGraph = styled.div`
         border-radius : 10px;
         width : 8rem;
         height : 3rem;
+        margin-right : 1rem;
+        &:hover {
+            color : white;
+            background-color : rgb(80, 94, 138);
+            outline-offset : 5px;
+            transition : .1s ease-in-out; 
+        }
     }
 `
 
-const kf5 = keyframes`
-0% {
-opacity : 0;
-}
-100% {
-    opacity : 1;
-}
-`
 
 export const StyledForm = styled.div`
     width : 50rem;
-    margin-left : 2rem;
+    margin-top : 6rem;
     background-color : lightgray;
     height : 100vh;
     display : flex;
     flex-direction : column;
-    align-items : flex-start;
+    align-items : center;
     justify-content : center;
     div {
         opacity : 0;
@@ -199,21 +209,73 @@ export const StyledForm = styled.div`
         padding : 3rem;
         border-radius : 15px;
         box-shadow : 0 0 2em white;
-        h3 {
-            margin-bottom : 2rem;
+        font-size : 20px;
+        section {
+            display : flex;
+            width : 30rem;
+            justify-content : space-evenly;
+            font-size : 20px;
+            b {
+                padding-left : 10px;
+                border-bottom : 1px solid  rgb(80, 94, 138);
+            }
         }
-        #current {
-            margin-bottom : 1rem;
+        h1 {
+            margin-bottom : 4rem;
+            border-bottom : 2px solid rgb(80, 94, 138);
+        }
+        h3 {
+            color :  lightgray;
+            width : 40rem;
+            height : 3rem;
+            display : flex;
+            justify-content : center;
+            align-items : center;
+            margin-bottom : 4rem;
+            background-color : rgb(142, 159, 211);
         }
         p {
             margin-top : 2rem;
         }
         form {
+            border-top : 2px solid rgb(80, 94, 138);
+            padding-top : 2rem;
+            margin-top : 5rem;
+            display : flex;
+            flex-direction : column;
+            margin-bottom : 6rem;
             main {
+                margin-bottom : 1rem;
+                width : 35rem;
                 display : flex;
-                width : 30rem;
-                justify-content : space-around;
+                justify-content : space-between;
+                input {
+                    border : 2px solid rgb(142, 159, 211);
+                    transition : .1s ease-in-out;
+                    border-radius : 10px;
+                    &:focus {
+                        border : none;
+                        outline : 2px solid rgb(142, 159, 211);
+                        outline-offset : 4px;
+                        transition : .1s ease-in-out;
+                    }
+                }
             }
         }
+        button {
+        background-color : white;
+        border : none;
+        outline : 2px solid rgb(80, 94, 138);
+        border-radius : 10px;
+        width : 8rem;
+        height : 3rem;
+        margin-right : 1rem;
+        &:hover {
+            color : white;
+            background-color : rgb(80, 94, 138);
+            outline-offset : 5px;
+            transition : .1s ease-in-out; 
+        }
+    }
     }
 `
