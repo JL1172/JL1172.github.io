@@ -6,6 +6,7 @@ const initialState = {
     stockInformation : [],
     flipPage : false,
     accountBalance : 100000,
+    totalEquity : 0,
     total : 0,
     confirmationMessage : {message : "", confirmationMessageDeployed : false},
     confirmed : false,
@@ -18,8 +19,7 @@ export const buyingFormReducer = (state= initialState, action) => {
         case(CHANGE_SHARE_FORM_VALUE) :
             return({...state, amountOfShares : action.payload[0], total : action.payload[1] * action.payload[0]});
         case(SUBMIT_PURCHASE) :
-        console.log(action.payload)
-            return({...state, stockInformation : [...state.stockInformation, action.payload[0]],
+            return({...state, totalEquity : action.payload[0].total, stockInformation : [...state.stockInformation, action.payload[0]],
             accountBalance : state.accountBalance - action.payload[0].total, total : 0, amountOfShares : 0,
             confirmationMessage : {message : "", confirmationMessageDeployed : false}, flipPage : !state.flipPage}
             )

@@ -68,10 +68,14 @@ height : 120vh;
     span {
         margin-right  : 3.5rem;
         margin-left : 1rem;
+        &:hover {
+            color : white;
+        }
 }
 b {
     padding-left : 6px;
 }
+
 }
 
 `
@@ -92,7 +96,8 @@ background-color: #16223a;
   margin-top: 8rem;
   margin-left : 1rem;
   align-items: center;
-  width : 12rem;
+  justify-content : center;
+  width : 17rem;
   justify-content: ${props => props.viewSaved ? "space-evenly" : "flex-end"};
   ${props =>
         props.viewSaved &&
@@ -104,6 +109,9 @@ background-color: #16223a;
   border-radius: 5px;
   h4 {
     opacity : 1;
+    span {
+        padding-left : 1rem;
+    }
   }
 }
 ${props =>

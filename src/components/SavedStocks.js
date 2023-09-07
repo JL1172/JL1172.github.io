@@ -9,9 +9,10 @@ const SavedStocks = (props) => {
         <>
             <Saved viewSaved={props.viewSaved} id="saved">
                 <div className="quick">
-                    <h4 >My Watch List<span className="material-symbols-outlined">
+                    <h4 >My Watch List</h4>
+                    <span className="material-symbols-outlined">
                         finance_chip
-                    </span></h4>
+                    </span>
                 </div>
                 {props.savedSecurities.length > 0 && props.savedSecurities.map((n, i) => {
                     return <div key={Date.now() * Math.random() * 13920} className="savedAllOfThese" >
@@ -26,10 +27,13 @@ const SavedStocks = (props) => {
                 })}
                 <div className="quick">
                     <h4>My portfolio</h4>
+                    <span className="material-symbols-outlined">
+                        account_balance
+                    </span>
                 </div>
             </Saved>
             <span onClick={() => props.viewSavedSecurities()}
-                style={{ backgroundColor: "lightgray", zIndex : "6", marginTop: "8rem", cursor: 'pointer', transition: ".3s ease-in-out" }}
+                style={{ backgroundColor: "lightgray", zIndex: "6", marginTop: "8rem", cursor: 'pointer', transition: ".3s ease-in-out" }}
                 className="material-symbols-outlined">
                 {props.viewSaved ? "arrow_back" : "arrow_forward"}
             </span>

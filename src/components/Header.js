@@ -23,7 +23,7 @@ const Header = (props) => {
                 <span className="material-symbols-outlined">
                     account_balance
                 </span>
-                Total Equity : %{ }
+                Portfolio Equity : ${props.totalEquity}
             </div>
         </div>
     )
@@ -36,6 +36,7 @@ const mapStateToProps = state => {
         secondaryQue: state.symbolQueryReducer.secondaryQue,
         hardFalse: state.symbolQueryReducer.hardFalse,
         crypto: state.crypto.cryptoData,
+        totalEquity : state.buyingForm.totalEquity,
     }
 }
 
