@@ -8,9 +8,9 @@ import Reactstrap, { Form,FormGroup,Input } from "reactstrap";
 
 
 const SavedStocks = (props) => {
-const advancedCompare = (sym,title,cpwb,overFlow,shares) => {
+const advancedCompare = (sym,title,cpwb,overFlow,shares,id) => {
     props.submitSearch(sym,title)
-    props.compareDifference(sym,cpwb,overFlow,shares)
+    props.compareDifference(sym,cpwb,overFlow,shares,id)
 }
 
     return (
@@ -54,7 +54,7 @@ const advancedCompare = (sym,title,cpwb,overFlow,shares) => {
                 </div>
                {props.stockInformation.length > 0 && props.stockInformation.map(n=> {
                     return <div className = "savedAllOfThese" key = {n.id}>
-                        <div onClick={()=> advancedCompare(n.symbol,n.title,n.currentPriceWhenBought,n.overFlowInformation, n.amountOfShares)} className="hoverOver">{n.title}</div>
+                        <div onClick={()=> advancedCompare(n.symbol,n.title,n.currentPriceWhenBought,n.overFlowInformation, n.amountOfShares, n.id)} className="hoverOver">{n.title}</div>
                         <span>total shares : {n.amountOfShares}</span>
                     </div>
                })}

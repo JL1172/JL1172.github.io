@@ -31,7 +31,7 @@ const Header = (props) => {
                 </span>
                 Loss or Gains :
                 <span style={{ marginLeft: "1rem" }}
-                    className={props.totalLossOrGain > 0 ? "pcGreen" : props.totalLossOrGain < 0 ? "pcRed" : "pcNeutral"}>{props.totalLossOrGain}</span>
+                    className={props.totalLossOrGain > 0 ? "pcGreen" : props.totalLossOrGain < 0 ? "pcRed" : "pcNeutral"}>${props.totalLossOrGain}</span>
             </div>
         </div>
     )

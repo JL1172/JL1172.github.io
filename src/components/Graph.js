@@ -24,6 +24,11 @@ const Graph = (props) => {
 
         props.addSecurity(obj)
     }
+    const advancedSelling = (id,current, shares) => {
+        const total = current * shares;
+        props.sellingMyStock(id,total)
+
+}
     return (
         <>
             {props.flipOver ?
@@ -125,7 +130,10 @@ const Graph = (props) => {
                                         <span className="even">${props.stockReconciliation[0].computations.difference}</span>
                                         <span className="even">{props.stockReconciliation[0].computations.percentageDifference}%</span>
                                     </div>
-                                    <button onClick={()=> props.sellingMyStock(props.stockReconciliation[0].amountOfShares,props.stockReconciliation[0].id)}>Sell</button>
+                                    <button onClick=
+                                    {()=>
+                                     advancedSelling(props.stockReconciliation[0].id,props.stockReconciliation[0].currentPrice,
+                                     props.stockReconciliation[0].shares)}>Sell</button>
                                 </div>
                             </>}
                         </div>

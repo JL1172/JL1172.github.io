@@ -51,6 +51,7 @@ export const buyingFormReducer = (state = initialState, action) => {
                 name: action.payload[2].description,
                 symbol: action.payload[2].displaySymbol,
                 shares: parseInt(action.payload[3]),
+                id : action.payload[4],
 
                 computations: {
                     difference: parseFloat(action.payload[0] - action.payload[1].c),
@@ -58,18 +59,15 @@ export const buyingFormReducer = (state = initialState, action) => {
                         parseFloat(((action.payload[0] - action.payload[1].c) / action.payload[0]) * 100),
                 }
             }
-
+     
             return ({ ...state, stockReconciliation: [insertObj], totalLossOrGain: state.totalLossOrGain + insertObj.computations.difference });
         case (PAGE_IS_VISIBLE):
             return ({ ...state, pageIsVisible: action.payload })
         case(SELLING_SECURITY) :
-            const obj = {
-                amountOfShares : action.payload[0],
-                amountOfMoney : state.stockReconciliation.currentPrice * action.payload[0],
-            }
-            return({...state, total : state.total + obj.amountOfMoney,
-                totalEquity : state.totalEquity - obj.amountOfMoney,
-                 stockInformation : state.stockInformation.filter(n=> n.id !== action.payload[1]),
+        console.log(action.payload)
+            return({...state, total : state.total + action.payload[1],
+                totalEquity : state.totalEquity - action.payload[1],
+                 stockInformation : state.stockInformation.filter(n=> n.id !== action.payload[0]),
                 pageIsVisible : false })
         default:
             return (state);
