@@ -93,7 +93,7 @@ background-color: #16223a;
 .quick {
     display: flex;
     opacity : 0;
-  margin-top: 8rem;
+  margin-top: 9rem;
   margin-left : 1rem;
   align-items: center;
   justify-content : center;
@@ -126,7 +126,7 @@ ${props =>
     display : flex;
     justify-content: space-between;
     color : white;
-    opacity : ${props=> props.viewSaved ? ".5" : "0"};
+    opacity : ${props => props.viewSaved ? ".5" : "0"};
     transition : 5s ease-in-out;
     width : 95%;
     border-bottom : 2px solid rgb(80, 94, 138);
@@ -252,7 +252,28 @@ export const StyledForm = styled.div`
             margin-top : 3rem;
             display : flex;
             flex-direction : column;
-            margin-bottom : 6rem;
+            margin-bottom : 2rem;
+            #submission {
+        display : flex;
+        width  : 40rem;
+        margin-top : 3rem;
+        flex-direction : row-reverse;
+            margin-bottom : -2rem;
+            #submit{
+                background-color : white;
+        border : none;
+        outline : 2px solid rgb(80, 94, 138);
+        border-radius : 10px;
+        width : 8rem;
+        height : 3rem;
+        margin-right : 1rem;
+        &:hover {
+            color : white;
+            background-color : rgb(80, 94, 138);
+            outline-offset : 5px;
+            transition : .1s ease-in-out; 
+        }
+    }}
             main {
                 margin-bottom : 1rem;
                 width : 35rem;
@@ -262,6 +283,7 @@ export const StyledForm = styled.div`
                     border : 2px solid rgb(142, 159, 211);
                     transition : .1s ease-in-out;
                     border-radius : 10px;
+                    height : 50px;
                     &:focus {
                         border : none;
                         outline : 2px solid rgb(142, 159, 211);
@@ -287,4 +309,5 @@ export const StyledForm = styled.div`
         }
     }
     }
+
 `

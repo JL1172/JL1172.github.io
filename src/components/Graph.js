@@ -79,7 +79,7 @@ const Graph = (props) => {
                         </select>
                         <div style = {{display : "flex"}}>
                         <button onClick={() => giveANewTitle(props.symbolInQue, props.overFlowInformation.description)}>Search</button>
-                        <button onClick={()=>props.flipPage()}>Flip</button>
+                        <button onClick={()=>props.flipPage()}>Buy</button>
                         </div>
                         </main>
                     : 

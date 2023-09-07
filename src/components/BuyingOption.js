@@ -14,13 +14,17 @@ const BuyingForm = (props) => {
             symbol: props.overFlowInformation.displaySymbol,
             title: props.overFlowInformation.description,
             overFlowInformation: props.overFlowInformation,
-            id : Date.now(),
+            id: Date.now(),
         }
         props.submitPurchase(obj);
     }
     const confirmPurchase = e => {
         e.preventDefault();
         props.confirmationMessage(props.title)
+    }
+    const flipItOver = (e) => {
+        e.preventDefault();
+        props.flipPage();
     }
 
     return (
@@ -48,28 +52,30 @@ const BuyingForm = (props) => {
                             <label htmlFor="numberToPurchase">Number of Shares to purchase: </label>
                             <input value={props.amountOfShares} name="amountOfShares" id="amountOfShares"
                                 onChange={(e) => props.changeShareFormValue(e.target.value, props.currentInformation[0].c)} type="number" />
-                            <input type="submit" id="submit" />
                         </main>
+                        <div id = "submission">
+                        <input type="submit" id="submit" />
+                    <button onClick={(e) => flipItOver(e)}>Back</button>
+                    </div>
                     </form>
-                    <button onClick={() => props.flipPage()}>Flip</button>
-                <CardFooter id ="footer" style={{ color: "lightgray" }}>Powered by smart-purchase technology</CardFooter>
-            </div></>}
-            </div>
-            )
+                    <CardFooter id="footer" style={{ color: "lightgray" }}>Powered by smart-purchase technology</CardFooter>
+                </div></>}
+        </div>
+    )
 }
 
 const mapStateToProps = state => {
     return {
-                currentInformation: state.symbolQueryReducer.currentSecurityInformation,
-            title: state.symbolQueryReducer.title,
-            overFlowInformation: state.symbolQueryReducer.overFlowInformation,
+        currentInformation: state.symbolQueryReducer.currentSecurityInformation,
+        title: state.symbolQueryReducer.title,
+        overFlowInformation: state.symbolQueryReducer.overFlowInformation,
 
-            total : state.buyingForm.total,
-            amountOfShares : state.buyingForm.amountOfShares,
+        total: state.buyingForm.total,
+        amountOfShares: state.buyingForm.amountOfShares,
 
-            bool : state.buyingForm.confirmationMessage.confirmationMessageDeployed,
-            message : state.buyingForm.confirmationMessage.message,
+        bool: state.buyingForm.confirmationMessage.confirmationMessageDeployed,
+        message: state.buyingForm.confirmationMessage.message,
     }
 }
 
-            export default connect(mapStateToProps,{flipPage, changeShareFormValue, submitPurchase, confirmationMessage})(BuyingForm);
+export default connect(mapStateToProps, { flipPage, changeShareFormValue, submitPurchase, confirmationMessage })(BuyingForm);
