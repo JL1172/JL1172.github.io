@@ -10,8 +10,10 @@ const initialState = {
     total : 0,
     confirmationMessage : {message : "", confirmationMessageDeployed : false},
     confirmed : false,
-    stockReconciliation : [],
+
+    stockReconciliation : {},
     isFetching : false,
+    totalLossOrGain : 0,
 }
 
 export const buyingFormReducer = (state= initialState, action) => {
@@ -34,7 +36,19 @@ export const buyingFormReducer = (state= initialState, action) => {
         case(FETCHING_INFORMATION) :
             return({...state, isFetching : action.payload })
         case(RECTIFY_POSITIONS) : 
-            return({...state, stockReconciliation : [] })
+        const insertObj = {
+            currentPrice : action.payload[1].c,
+            priceWhenBought : action.payload[0],
+            name : action.payload[2].description,
+            symbol : action.payload[2].displaySymbol,
+    
+            computations : {
+                difference : (action.payload[0] - action.payload[1].c).toFixed(2),
+                percentageDifference : action.payload[0] / action.payload[1].c.toFixed(2),
+            }
+        }
+  
+            return({...state, stockReconciliation : [insertObj], totalLossOrGain : state.totalLossOrGain + insertObj.computations.difference });
         default : 
             return(state); 
     }

@@ -6,7 +6,10 @@ import { combineReducers } from "redux";
 import { compareDifference } from "./actions/buyingFormAction";
 
 const SavedStocks = (props) => {
-
+const advancedCompare = (sym,title,cpwb,overFlow) => {
+    props.submitSearch(sym,title)
+    props.compareDifference(sym,cpwb,overFlow)
+}
     return (
         <>
             <Saved viewSaved={props.viewSaved} id="saved">
@@ -17,7 +20,7 @@ const SavedStocks = (props) => {
                     </span>
                 </div>
                 {props.savedSecurities.length > 0 && props.savedSecurities.map((n, i) => {
-                    return <div key={i + 1  * Math.random()*124} className="savedAllOfThese" >
+                    return <div key={i} className="savedAllOfThese" >
                         <div className="hoverOver" onClick={() => props.submitSearch(n.symbol, n.title)} key={i}>{n.saved && n.title}</div>
                         <span 
                         className= 
@@ -25,7 +28,7 @@ const SavedStocks = (props) => {
                         : n.percentChange < 0 ? "pcRed material-symbols-outlined" : "pcNeutral material-symbols-outlined"}>
                             {n.percentChange > 0 ? "trending_up" : n.percentChange < 0 ? "trending_down" : "trending_flat" }</span>
                         <span>{n.percentChange}%</span>
-                        <span key={i + 1 * Math.random()*124} style={{ cursor: "pointer" }}
+                        <span key={1273} style={{ cursor: "pointer" }}
                             onClick={() => props.remove(n.id)}
                             className="material-symbols-outlined">
                             delete
@@ -41,7 +44,7 @@ const SavedStocks = (props) => {
                 </div>
                {props.stockInformation.length > 0 && props.stockInformation.map(n=> {
                     return <div className = "savedAllOfThese" key = {n.id}>
-                        <div onClick={()=> props.compareDifference(n.symbol,n.currentPriceWhenBought)} className="hoverOver">{n.title}</div>
+                        <div onClick={()=> advancedCompare(n.symbol,n.title,n.currentPriceWhenBought,n.overFlowInformation)} className="hoverOver">{n.title}</div>
                         <span>total shares : {n.amountOfShares}</span>
                     </div>
                })}

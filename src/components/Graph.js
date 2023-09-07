@@ -99,7 +99,20 @@ const Graph = (props) => {
                         {" "}
                     </Spinner> :
                     <div>
-                        data
+                        {props.stockReconciliation.length > 0 && <>
+                        <h2>{props.stockReconciliation[0].name}</h2>
+                        <div style = {{display : "flex", flexDirection : "column"}}>
+                            <span>Current Price : {props.stockReconciliation[0].currentPrice.toFixed(2)}</span>
+                            <span>Price When Bought : {props.stockReconciliation[0].priceWhenBought.toFixed(2)}</span>
+                        </div>
+                        <div>
+                            <div>
+
+                            </div>
+                            <div>
+
+                            </div>
+                        </div></>}
                     </div>
                 }
             </StyledReconciliation>
@@ -121,6 +134,9 @@ const mapStateToProps = state => {
         flipOver: state.buyingForm.flipPage,
 
         isFetching: state.buyingForm.isFetching,
+
+        stockReconciliation : state.buyingForm.stockReconciliation,
+
     }
 }
 
