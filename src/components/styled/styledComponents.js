@@ -19,7 +19,7 @@ const kf = keyframes`
 
 }
 100% {
-    width : 25rem;
+    width : 28rem;
 }
 `
 const kf1 = keyframes`
@@ -38,7 +38,7 @@ const h4kf = keyframes`
     opacity : 0;
 }
 100% {
-    opacity : 1;
+    opacity : .5;
 }
 `
 
@@ -126,8 +126,14 @@ ${props =>
     display : flex;
     justify-content: space-between;
     color : white;
-    opacity : ${props => props.viewSaved ? ".5" : "0"};
-    transition : 5s ease-in-out;
+    opacity : 0;
+    ${props =>
+        props.viewSaved &&
+        css`
+    animation : ${h4kf} .5s ease-in-out forwards;
+    animation-delay : .3s;
+    `
+    }
     width : 95%;
     border-bottom : 2px solid rgb(80, 94, 138);
 }

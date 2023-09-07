@@ -54,30 +54,21 @@ body {
   min-width: 3rem;
   max-width: fit-content;
 }
-.pcRed::after {
-  content: "%";
-}
-.pcGreen::before {
-  content: "+";
-}
+
 .pcGreen {
   background-color: green;
   border-radius: 10px;
   min-width: 3rem;
   max-width: fit-content;
 }
-.pcGreen::after {
-  content: "%";
-}
+
 .pcNeutral {
   background-color: lightslategray;
   border-radius: 10px;
   min-width: 3rem;
   max-width: fit-content;
 }
-.pcNeutral::after {
-  content: "%";
-}
+
 
 
 

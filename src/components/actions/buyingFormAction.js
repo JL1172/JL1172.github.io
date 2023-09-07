@@ -1,3 +1,5 @@
+import axios from "axios";
+import { API_KEY } from "../../@key/key";
 export const FLIP_PAGE = "FLIP_PAGE";
 export const CHANGE_SHARE_FORM_VALUE = "CHANGE_SHARE_FORM_VALUE";
 export const SUBMIT_PURCHASE = "SUBMIT_PURCHASE";
@@ -21,11 +23,11 @@ export const confirmationMessage = (title) => {
     return {type : CONFIRMATION_MESSAGE, payload : title}
 }
 
-export const compareDifference = (symbol) => dispatch => {
+export const compareDifference = (symbol,oldPriceData) => dispatch => {
     dispatch(fetchingInformation(true))
     axios.get(`https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${API_KEY}`)
     .then(res=> {
-        console.log(res.data);
+        dispatch(rectifyPositions(oldPriceData,res.data))
         dispatch(fetchingInformation(false))
     })
 }
