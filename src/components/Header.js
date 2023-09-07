@@ -8,21 +8,9 @@ const Header = (props) => {
             <div id="profile"><span className="material-symbols-outlined">
                 account_circle
             </span>Profile</div>
-            <div id = "rotating" style = {{display : "flex"}}>
-                {/* <input id = "search" type = "text" value = {props.filteredResults} onChange={(e)=> props.searchResults(e.target.value)} />
-                <select onChange = {(e)=> props.thirdSearch(e.target.value)} value = {props.symbols} disabled = {false}>
-                    {props.symbols.length === 1 ? <option value = ""></option> : "" }
-                    {props.symbols.map((n,i)=> {
-                        return <option 
-                        value = {JSON.stringify(n)}
-                         key = {i}>{n.description}</option>
-                    })}
-                </select>
-                <button disabled = {!props.hardFalse} onClick={()=> props.submitSearch(props.secondaryQue.displaySymbol, props.secondaryQue.description)}>Fetch Data</button> */}
-                {props.symbols.map((n,i)=> {
-                    if (i < 100) {
-                    return <div key = {i}>{n.displaySymbol}</div>
-                    }
+            <div className = "rotating" style = {{display : "flex"}}>
+                {props.crypto.map((n,i)=> {
+                    return <span key = {n.id}>{n.name} <b>{n.current_price}</b></span>
                 })}
             </div>
             <div id="accountBalance">
@@ -41,6 +29,7 @@ const mapStateToProps = state => {
         filteredResults : state.symbolQueryReducer.filteredResults,
         secondaryQue : state.symbolQueryReducer.secondaryQue, 
         hardFalse : state.symbolQueryReducer.hardFalse,
+        crypto : state.crypto.cryptoData,
     }
 }
 

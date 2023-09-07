@@ -8,9 +8,9 @@ import SavedStocks from "/src/components/SavedStocks.js";
 import Graph from './components/Graph';
 import { connect } from 'react-redux';
 import { searchResults } from './components/actions/symbolQueryAction';
+import GatherAllCrypto from "./components/customHooks/useCyptoState"
 
 function App(props) {
-  const [symbols] = useSymbolState(API_KEY);
 
   const filteredList = () => {
     const term = props.filteredResults.trim().toLowerCase();
@@ -28,9 +28,10 @@ function App(props) {
 
   return (
     <StyledDiv className="App">
-      <Header symbols = {filteredList()} />
+      <Header  />
       <SavedStocks />
-      <Graph symbols = {symbols} />
+      <Graph  />
+      <GatherAllCrypto />
     </StyledDiv>
   );
 }
@@ -38,6 +39,7 @@ function App(props) {
 const mapStateToProps = state => {
   return {
     filteredResults : state.symbolQueryReducer.filteredResults,
+    symbolsData : state.crypto.symbolsData,
   }
 }
 

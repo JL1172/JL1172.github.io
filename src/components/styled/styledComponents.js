@@ -9,7 +9,7 @@ const kf = keyframes`
 
 }
 100% {
-    width : 18rem;
+    width : 25rem;
 }
 `
 const kf1 = keyframes`
@@ -34,27 +34,36 @@ const h4kf = keyframes`
 
 const rotate = keyframes`
 0% {
-    transform : translateX(0rem);
-    opacity : 1;
+    left : 100%;
+    opacity : .5;
 }
 100% {
-    transform : translateX(50rem);
+    left : 0%;
+    opacity : .5;
 }
 `
 
 export const StyledDiv = styled.div`
 display : flex;
 height : 100vh;
-#rotating {
-    animation : ${rotate} 30s ease-in-out infinite;
+.rotating {
+    animation : ${rotate} 4s ease-in-out forwards;
     color : lightblue;
-    position : absolute;
-    top : 0;
-    left : -50rem;
-    div {
-        margin-right : .5rem;
+    top: 0;
+    left: 100%;
+    width: 100%;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    span {
+        margin-right  : 3.5rem;
+        margin-left : 1rem;
+}
+b {
+    padding-left : 6px;
 }
 }
+
 `
 
 export const Saved = styled.div`
@@ -71,47 +80,36 @@ background-color: #16223a;
     display: flex;
     opacity : 0;
   margin-top: 6rem;
+  margin-left : 1rem;
   align-items: center;
-  width : 95%;
+  width : 12rem;
   justify-content: ${props => props.viewSaved ? "space-evenly" : "flex-end"};
   ${props =>
         props.viewSaved &&
         css`
-    animation : ${kf1} .5s ease-in-out forwards;
-    animation-delay : 1s;
+    animation : ${kf1} .4s ease-in-out forwards;
+    animation-delay : .5s;
     `
     }
   border-radius: 5px;
   h4 {
-    opacity : 0;
-    ${props =>
-        props.viewSaved &&
-        css`
-    animation : ${h4kf} .5s ease-in-out forwards;
-    animation-delay : 1s;
-    `
-    }
+    opacity : 1;
   }
 }
 ${props =>
         props.viewSaved &&
         css`
-    animation : ${kf} 1s ease-in-out forwards;
+    animation : ${kf} .5s ease-in-out forwards;
     `
     }
 .savedAllOfThese {
     margin-top : 1rem;
+    margin-left : 1rem;
     display : flex;
     justify-content: space-between;
-    opacity : 0;
     color : white;
-    ${props =>
-        props.viewSaved &&
-        css`
-    animation : ${h4kf} .5s ease-in-out forwards;
-    animation-delay : 1.2s;
-    `
-    }
+    opacity : ${props=> props.viewSaved ? ".5" : "0"};
+    transition : 5s ease-in-out;
     width : 95%;
     border-bottom : 2px solid rgb(80, 94, 138);
 }
@@ -119,12 +117,12 @@ ${props =>
 `
 
 export const StyledGraph = styled.div`
-    width : 100%;
+    width : 50rem;
     background-color : lightgray;
     height : 100vh;
     display : flex;
     flex-direction : column;
-    align-items : center;
+    align-items : flex-start;
     justify-content : center;
     #main {
         background-color : white;

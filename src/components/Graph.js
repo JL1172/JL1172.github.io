@@ -22,14 +22,8 @@ const Graph = (props) => {
      
         props.addSecurity(obj)
     }
-    const advancedRemove = () => {
-        let res2 = props.saved.map(n=> {
-            if (n.symbol === props.overFlowInformation.symbol) {
-                return n.id;
-            }
-        })
-        props.remove(res2[1])
-    }
+  
+
     return (
         <StyledGraph>
             {!props.isFetching ?
@@ -38,10 +32,7 @@ const Graph = (props) => {
                         {!props.favorited ? 
                         <span style = {{ cursor : "pointer"}}onClick={()=> advancedAdd()} className="material-symbols-outlined">
                          add_circle
-                        </span> : 
-                        <span style = {{ cursor : "pointer"}}onClick={()=> advancedRemove()} className="material-symbols-outlined">
-                         remove
-                        </span>}
+                        </span> : ""}
                     </div>
                     {props.title && <h3>{props.title}</h3>}
                     <div id="graphs" style={{ display: "flex" }}>
@@ -76,7 +67,7 @@ const Graph = (props) => {
                     </div>}
                     <select type="text" onChange={(e) => props.changeSymbol(e.target.value)} value={props.symbolInQue.displaySymbol}>
                         <option value="">select</option>
-                        {props.symbols.map((n, i) => {
+                        {props.symbolData.map((n, i) => {
                             return <option key={i} value={JSON.stringify(n)}>{n.displaySymbol} {n.description}</option>
                         })}
                     </select>
@@ -103,6 +94,7 @@ const mapStateToProps = state => {
         hardFalse: state.symbolQueryReducer.hardFalse,
         favorited: state.symbolQueryReducer.favorited,
         saved : state.symbolQueryReducer.savedSecurities,
+        symbolData : state.crypto.symbolsData,
     }
 }
 
