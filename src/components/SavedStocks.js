@@ -31,6 +31,13 @@ const SavedStocks = (props) => {
                         account_balance
                     </span>
                 </div>
+               {props.stockInformation.length > 0 && props.stockInformation.map(n=> {
+                    console.log(n)
+                    return <div className = "savedAllOfThese" key = {n.id}>
+                        <div className="hoverOver">{n.title}</div>
+                        <span>total shares : {n.amountOfShares}</span>
+                    </div>
+               })}
             </Saved>
             <span onClick={() => props.viewSavedSecurities()}
                 style={{ backgroundColor: "lightgray", zIndex: "6", marginTop: "8rem", cursor: 'pointer', transition: ".3s ease-in-out" }}
@@ -51,6 +58,9 @@ const mapStateToProps = (state) => {
         title: state.symbolQueryReducer.title,
         overFlowInformation: state.symbolQueryReducer.overFlowInformation,
         hardFalse: state.symbolQueryReducer.hardFalse,
+
+        stockInformation : state.buyingForm.stockInformation,
+
     }
 }
 
