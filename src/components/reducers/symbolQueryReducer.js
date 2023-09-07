@@ -11,7 +11,6 @@ const initialState = {
     currentSecurityInformation : [],
     savedSecurities : [],
     viewSavedSecurities : false,
-    accountBalance : 100000,
     title : "",
     filteredResults : "",
     overFlowInformation : [],

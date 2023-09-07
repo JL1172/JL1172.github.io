@@ -49,7 +49,7 @@ height : 100vh;
 .rotating {
     animation : ${rotate} 4s ease-in-out forwards;
     color : lightblue;
-    top: 0;
+    top: 1rem;
     left: 100%;
     width: 100%;
     overflow: hidden;
@@ -75,11 +75,11 @@ background-color: #16223a;
   justify-content: flex-start;
   flex-direction : column;
   align-items: flex-start;
-
+    margin-top : 1rem;
 #quick {
     display: flex;
     opacity : 0;
-  margin-top: 6rem;
+  margin-top: 8rem;
   margin-left : 1rem;
   align-items: center;
   width : 12rem;
@@ -115,16 +115,16 @@ ${props =>
 }
 
 `
-
 export const StyledGraph = styled.div`
     width : 50rem;
     background-color : lightgray;
     height : 100vh;
     display : flex;
     flex-direction : column;
-    align-items : flex-start;
+    align-items : center;
     justify-content : center;
     #main {
+        margin-top  :5rem;
         background-color : white;
         display : flex;
         flex-direction : column;
@@ -137,6 +137,7 @@ export const StyledGraph = styled.div`
     }
     h3 {
         margin-bottom : 3rem;
+        color :  #16223a;
     }
     #graphs {
         width : 35rem;
@@ -147,13 +148,72 @@ export const StyledGraph = styled.div`
         width : 35rem;
         height : 3rem;
         border-radius : 10rem;
-        background-color : lightgray;
+        background-color :rgb(80, 94, 138);
+        color : white;
         &:focus {
-            outline : none;
-            box-shadow : 0 0 3em lightblue;
+            outline :#16223a;
+            box-shadow : 0 0 3em lightgray;
         }
         option {
+            transition  : .1s ease-in-out;
             text-align : center;
+        }
+    }
+    button {
+        background-color : white;
+        border : none;
+        outline : 2px solid rgb(80, 94, 138);
+        border-radius : 10px;
+        width : 8rem;
+        height : 3rem;
+    }
+`
+
+const kf5 = keyframes`
+0% {
+opacity : 0;
+}
+100% {
+    opacity : 1;
+}
+`
+
+export const StyledForm = styled.div`
+    width : 50rem;
+    margin-left : 2rem;
+    background-color : lightgray;
+    height : 100vh;
+    display : flex;
+    flex-direction : column;
+    align-items : flex-start;
+    justify-content : center;
+    div {
+        opacity : 0;
+        animation : ${kf5} 2s ease-in-out forwards;
+        background-color : white;
+        display : flex;
+        flex-direction : column;
+        width : 40rem;
+        justify-content : space-evenly;
+        align-items : center;
+        padding : 3rem;
+        border-radius : 15px;
+        box-shadow : 0 0 2em white;
+        h3 {
+            margin-bottom : 2rem;
+        }
+        #current {
+            margin-bottom : 1rem;
+        }
+        p {
+            margin-top : 2rem;
+        }
+        form {
+            main {
+                display : flex;
+                width : 30rem;
+                justify-content : space-around;
+            }
         }
     }
 `

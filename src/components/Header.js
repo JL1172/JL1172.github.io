@@ -10,7 +10,7 @@ const Header = (props) => {
             </span>Profile</div>
             <div className = "rotating" style = {{display : "flex"}}>
                 {props.crypto.map((n,i)=> {
-                    return <span key = {n.id}>{n.name} <b>{n.current_price}</b></span>
+                    return <span key = {n.id}>{n.name} <b>${n.current_price}</b></span>
                 })}
             </div>
             <div id="accountBalance">
@@ -25,7 +25,7 @@ const Header = (props) => {
 
 const mapStateToProps = state => {
     return {
-        accountBalance: state.symbolQueryReducer.accountBalance,
+        accountBalance: state.buyingForm.accountBalance,
         filteredResults : state.symbolQueryReducer.filteredResults,
         secondaryQue : state.symbolQueryReducer.secondaryQue, 
         hardFalse : state.symbolQueryReducer.hardFalse,
