@@ -23,11 +23,11 @@ export const confirmationMessage = (title) => {
     return {type : CONFIRMATION_MESSAGE, payload : title}
 }
 
-export const compareDifference = (symbol,oldPriceData,overflow) => dispatch => {
+export const compareDifference = (symbol,oldPriceData,overflow, shares) => dispatch => {
     dispatch(fetchingInformation(true))
     axios.get(`https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${API_KEY}`)
     .then(res=> {
-        dispatch(rectifyPositions(oldPriceData,res.data,overflow))
+        dispatch(rectifyPositions(oldPriceData,res.data,overflow, shares))
         dispatch(fetchingInformation(false))
     })
 }
@@ -36,7 +36,7 @@ const fetchingInformation = (bool) => {
     return{type  :FETCHING_INFORMATION, payload : bool};
 }
 
-const rectifyPositions = (oldData,newData,overflow) => {
-    return{type : RECTIFY_POSITIONS, payload : [oldData,newData,overflow]}; 
+const rectifyPositions = (oldData,newData,overflow, shares) => {
+    return{type : RECTIFY_POSITIONS, payload : [oldData,newData,overflow, shares]}; 
 }
 

@@ -41,6 +41,7 @@ export const buyingFormReducer = (state= initialState, action) => {
             priceWhenBought : action.payload[0],
             name : action.payload[2].description,
             symbol : action.payload[2].displaySymbol,
+            shares : parseInt(action.payload[3]),
     
             computations : {
                 difference : (action.payload[0] - action.payload[1].c).toFixed(2),

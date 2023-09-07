@@ -100,19 +100,25 @@ const Graph = (props) => {
                     </Spinner> :
                     <div>
                         {props.stockReconciliation.length > 0 && <>
-                        <h2>{props.stockReconciliation[0].name}</h2>
-                        <div style = {{display : "flex", flexDirection : "column"}}>
-                            <span>Current Price : {props.stockReconciliation[0].currentPrice.toFixed(2)}</span>
-                            <span>Price When Bought : {props.stockReconciliation[0].priceWhenBought.toFixed(2)}</span>
-                        </div>
-                        <div>
-                            <div>
-
+                            <h2>{props.stockReconciliation[0].name}</h2>
+                            <h4>{props.stockReconciliation[0].symbol}</h4>
+                            <div style={{ display: "flex", flexDirection: "column" }}>
+                                <span>Current Price : {props.stockReconciliation[0].currentPrice.toFixed(2)}</span>
+                                <span>Price When Bought : {props.stockReconciliation[0].priceWhenBought.toFixed(2)}</span>
+                                <span>Total shares : {props.stockReconciliation[0].shares}</span>
+                                <div style={{ display: "flex", flexDirection: "row" }}>
+                                    <span>{props.stockReconciliation[0].computations.difference < 0 ? "Total Loss"
+                                        : props.stockReconciliation[0].computations.difference > 0 ? "Total Gain" : "No change"}</span>
+                                    <span className={props.stockReconciliation[0].computations.difference > 0 ? "pcGreen material-symbols-outlined" :
+                                        props.stockReconciliation[0].computations.difference < 0 ? "pcRed material-symbols-outlined" : "pcNeutral material-symbols-outlined"
+                                    }>
+                                        {props.stockReconciliation[0].computations.difference < 0 ? "trending_down" :
+                                            props.stockReconciliation[0].computations.difference > 0 ? "trending_up" : "trending_flat"}
+                                    </span>
+                                </div>
+                                <span>{props.stockReconciliation[0].computations.difference}</span>
                             </div>
-                            <div>
-
-                            </div>
-                        </div></>}
+                        </>}
                     </div>
                 }
             </StyledReconciliation>
@@ -135,7 +141,7 @@ const mapStateToProps = state => {
 
         isFetching: state.buyingForm.isFetching,
 
-        stockReconciliation : state.buyingForm.stockReconciliation,
+        stockReconciliation: state.buyingForm.stockReconciliation,
 
     }
 }

@@ -6,9 +6,9 @@ import { combineReducers } from "redux";
 import { compareDifference } from "./actions/buyingFormAction";
 
 const SavedStocks = (props) => {
-const advancedCompare = (sym,title,cpwb,overFlow) => {
+const advancedCompare = (sym,title,cpwb,overFlow,shares) => {
     props.submitSearch(sym,title)
-    props.compareDifference(sym,cpwb,overFlow)
+    props.compareDifference(sym,cpwb,overFlow,shares)
 }
     return (
         <>
@@ -44,7 +44,7 @@ const advancedCompare = (sym,title,cpwb,overFlow) => {
                 </div>
                {props.stockInformation.length > 0 && props.stockInformation.map(n=> {
                     return <div className = "savedAllOfThese" key = {n.id}>
-                        <div onClick={()=> advancedCompare(n.symbol,n.title,n.currentPriceWhenBought,n.overFlowInformation)} className="hoverOver">{n.title}</div>
+                        <div onClick={()=> advancedCompare(n.symbol,n.title,n.currentPriceWhenBought,n.overFlowInformation, n.amountOfShares)} className="hoverOver">{n.title}</div>
                         <span>total shares : {n.amountOfShares}</span>
                     </div>
                })}
