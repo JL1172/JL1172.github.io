@@ -7,6 +7,8 @@ export const CONFIRMATION_MESSAGE = "CONFIRMATION_MESSAGE";
 export const RECTIFY_POSITIONS= "RECTIFY_POSITIONS";  
 export const FETCHING_INFORMATION = "FETCHING_INFORMATION";   
 export const PAGE_IS_VISIBLE = "PAGE_IS_VISIBLE";
+export const SELLING_SECURITY = "SELLING_SECURITY";
+export const SELLING_VISIBILITY = "SELLING_VISIBILITY";
 
 export const flipPage = () => {
     return{type : FLIP_PAGE}
@@ -43,4 +45,12 @@ const rectifyPositions = (oldData,newData,overflow, shares) => {
 }
 export const makePageVisibile = (bool) => {
     return{type : PAGE_IS_VISIBLE, payload : bool}
+}
+
+export const sellingStockVisibility = () => {
+    return{type : SELLING_VISIBILITY}
+}
+
+export const sellingMyStock = (amount, stockId) => {
+    return{type : SELLING_SECURITY, payload : [amount, stockId]}
 }

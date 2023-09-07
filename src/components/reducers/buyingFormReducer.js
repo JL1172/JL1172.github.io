@@ -1,4 +1,4 @@
-import { CHANGE_SHARE_FORM_VALUE, CONFIRMATION_MESSAGE, FETCHING_INFORMATION, FLIP_PAGE, PAGE_IS_VISIBLE, RECTIFY_POSITIONS, SUBMIT_PURCHASE, confirmationMessage } from "../actions/buyingFormAction"
+import { CHANGE_SHARE_FORM_VALUE, CONFIRMATION_MESSAGE, FETCHING_INFORMATION, FLIP_PAGE, PAGE_IS_VISIBLE, RECTIFY_POSITIONS, SELLING_SECURITY, SUBMIT_PURCHASE, confirmationMessage } from "../actions/buyingFormAction"
 
 
 const initialState = {
@@ -16,6 +16,9 @@ const initialState = {
     totalLossOrGain: 0,
 
     pageIsVisible: false,
+
+    sellingVisible: false,
+    sharesToBeSold: "",
 }
 
 export const buyingFormReducer = (state = initialState, action) => {
@@ -52,13 +55,22 @@ export const buyingFormReducer = (state = initialState, action) => {
                 computations: {
                     difference: parseFloat(action.payload[0] - action.payload[1].c),
                     percentageDifference:
-                    parseFloat(((action.payload[0] - action.payload[1].c) / action.payload[0]) * 100),
+                        parseFloat(((action.payload[0] - action.payload[1].c) / action.payload[0]) * 100),
                 }
             }
 
             return ({ ...state, stockReconciliation: [insertObj], totalLossOrGain: state.totalLossOrGain + insertObj.computations.difference });
-        case(PAGE_IS_VISIBLE) :
-            return({...state, pageIsVisible : action.payload})
+        case (PAGE_IS_VISIBLE):
+            return ({ ...state, pageIsVisible: action.payload })
+        case(SELLING_SECURITY) :
+            const obj = {
+                amountOfShares : action.payload[0],
+                amountOfMoney : state.stockReconciliation.currentPrice * action.payload[0],
+            }
+            return({...state, total : state.total + obj.amountOfMoney,
+                totalEquity : state.totalEquity - obj.amountOfMoney,
+                 stockInformation : state.stockInformation.filter(n=> n.id !== action.payload[1]),
+                pageIsVisible : false })
         default:
             return (state);
     }

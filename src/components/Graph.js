@@ -5,7 +5,7 @@ import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip } from 'recharts'
 import { addSecurity, changeSymbol, remove, setTitle, submitSearch } from "./actions/symbolQueryAction";
 import { Button, Spinner } from "reactstrap";
 import BuyingOption from "./BuyingOption";
-import { fetchingInformation, flipPage, makePageVisibile } from "./actions/buyingFormAction";
+import { fetchingInformation, flipPage, makePageVisibile, sellingMyStock, sellingStockVisibility } from "./actions/buyingFormAction";
 
 const Graph = (props) => {
     const giveANewTitle = (symbol, title) => {
@@ -125,6 +125,7 @@ const Graph = (props) => {
                                         <span className="even">${props.stockReconciliation[0].computations.difference}</span>
                                         <span className="even">{props.stockReconciliation[0].computations.percentageDifference}%</span>
                                     </div>
+                                    <button onClick={()=> props.sellingMyStock(props.stockReconciliation[0].amountOfShares,props.stockReconciliation[0].id)}>Sell</button>
                                 </div>
                             </>}
                         </div>
@@ -151,8 +152,9 @@ const mapStateToProps = state => {
 
         stockReconciliation: state.buyingForm.stockReconciliation,
         pageIsVisible: state.buyingForm.pageIsVisible,
+        sellingVisible: state.buyingForm.sellingVisible,
 
     }
 }
 
-export default connect(mapStateToProps, { changeSymbol, submitSearch, setTitle, addSecurity, remove, flipPage, makePageVisibile })(Graph);
+export default connect(mapStateToProps, { changeSymbol, submitSearch, setTitle, addSecurity, remove, flipPage, makePageVisibile, sellingMyStock })(Graph);

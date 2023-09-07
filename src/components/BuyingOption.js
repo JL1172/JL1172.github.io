@@ -32,7 +32,7 @@ const BuyingForm = (props) => {
             {props.bool ? <>
                 <div>{props.message}</div>
                 <form onSubmit={(e) => advancedPurchase(e)}>
-                    <input type="submit" value="confirm" />
+                    <input id = "confirm" type="submit" value="confirm" />
                 </form>
             </> : <>
                 <h1>Purchase Form</h1>

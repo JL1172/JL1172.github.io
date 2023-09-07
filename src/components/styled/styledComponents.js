@@ -317,7 +317,21 @@ export const StyledForm = styled.div`
         }
     }
     }
-
+    #confirm {
+        background-color : white;
+        border : none;
+        outline : 2px solid rgb(80, 94, 138);
+        border-radius : 10px;
+        width : 8rem;
+        height : 3rem;
+        margin-right : 1rem;
+        &:hover {
+            color : white;
+            background-color : rgb(80, 94, 138);
+            outline-offset : 5px;
+            transition : .1s ease-in-out; 
+        }
+    }
 `
 
 export const StyledReconciliation = styled.div`
@@ -367,6 +381,22 @@ export const StyledReconciliation = styled.div`
             background-color :   rgb(142, 159, 211);
             margin : 1rem;
             color : white;
+        }
+    }
+    button {
+        margin-top : 1rem;
+        background-color : white;
+        border : none;
+        outline : 2px solid rgb(80, 94, 138);
+        border-radius : 10px;
+        width : 8rem;
+        height : 3rem;
+        margin-right : 1rem;
+        &:hover {
+            color : white;
+            background-color : rgb(80, 94, 138);
+            outline-offset : 5px;
+            transition : .1s ease-in-out; 
         }
     }
 `
