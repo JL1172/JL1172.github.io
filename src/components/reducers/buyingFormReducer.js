@@ -1,4 +1,4 @@
-import { CHANGE_SHARE_FORM_VALUE, CONFIRMATION_MESSAGE, FLIP_PAGE, SUBMIT_PURCHASE, confirmationMessage } from "../actions/buyingFormAction"
+import { CHANGE_SHARE_FORM_VALUE, CONFIRMATION_MESSAGE, FETCHING_INFORMATION, FLIP_PAGE, RECTIFY_POSITIONS, SUBMIT_PURCHASE, confirmationMessage } from "../actions/buyingFormAction"
 
 
 const initialState = {
@@ -10,6 +10,8 @@ const initialState = {
     total : 0,
     confirmationMessage : {message : "", confirmationMessageDeployed : false},
     confirmed : false,
+    stockReconciliation : [],
+    isFetching : false,
 }
 
 export const buyingFormReducer = (state= initialState, action) => {
@@ -29,6 +31,10 @@ export const buyingFormReducer = (state= initialState, action) => {
                 confirmationMessageDeployed : true,
             }    
             })
+        case(FETCHING_INFORMATION) :
+            return({...state, isFetching : action.payload })
+        case(RECTIFY_POSITIONS) : 
+            return({...state, stockReconciliation : [] })
         default : 
             return(state); 
     }

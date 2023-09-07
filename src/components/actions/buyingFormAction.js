@@ -2,7 +2,8 @@ export const FLIP_PAGE = "FLIP_PAGE";
 export const CHANGE_SHARE_FORM_VALUE = "CHANGE_SHARE_FORM_VALUE";
 export const SUBMIT_PURCHASE = "SUBMIT_PURCHASE";
 export const CONFIRMATION_MESSAGE = "CONFIRMATION_MESSAGE";
-export const RECTIFY_POSITIONS= "RECTIFY_POSITIONS";    
+export const RECTIFY_POSITIONS= "RECTIFY_POSITIONS";  
+export const FETCHING_INFORMATION = "FETCHING_INFORMATION";   
 
 export const flipPage = () => {
     return{type : FLIP_PAGE}
@@ -20,6 +21,20 @@ export const confirmationMessage = (title) => {
     return {type : CONFIRMATION_MESSAGE, payload : title}
 }
 
-export const rectifyPositions = () => {
-    return{type : RECTIFY_POSITIONS}
+export const compareDifference = (symbol) => dispatch => {
+    dispatch(fetchingInformation(true))
+    axios.get(`https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${API_KEY}`)
+    .then(res=> {
+        console.log(res.data);
+        dispatch(fetchingInformation(false))
+    })
 }
+
+const fetchingInformation = (bool) => {
+    return{type  :FETCHING_INFORMATION, payload : bool};
+}
+
+const rectifyPositions = (oldData,newData) => {
+    return{type : RECTIFY_POSITIONS, payload : [oldData,newData]}; 
+}
+

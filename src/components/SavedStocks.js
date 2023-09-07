@@ -25,6 +25,7 @@ const SavedStocks = (props) => {
                         </span>
                     </div>
                 })}
+
                 <div className="quick">
                     <h4>My portfolio</h4>
                     <span className="material-symbols-outlined">
@@ -60,6 +61,7 @@ const mapStateToProps = (state) => {
         hardFalse: state.symbolQueryReducer.hardFalse,
 
         stockInformation : state.buyingForm.stockInformation,
+        isFetching : state.buyingForm.isFetching,
 
     }
 }
