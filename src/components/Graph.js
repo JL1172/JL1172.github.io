@@ -24,7 +24,6 @@ const Graph = (props) => {
 
         props.addSecurity(obj)
     }
-    console.log(props.flipPage)
     return (
         <>
         {props.flipOver ? 
