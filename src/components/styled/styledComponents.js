@@ -327,7 +327,7 @@ export const StyledReconciliation = styled.div`
     justify-content : center;
     background-color : lightgray;
     #container {
-        height : 40vh;
+        height : 45vh;
     }
     #closeButton {
         width : 40rem;
@@ -348,7 +348,9 @@ export const StyledReconciliation = styled.div`
         }
         .spreadOut {
                 margin-bottom : 1rem;
-
+                b {
+                    border-bottom : 2px solid  rgb(142, 159, 211);
+                }
             }
         #secondGain {
             display : flex;
@@ -357,6 +359,14 @@ export const StyledReconciliation = styled.div`
            .even { 
             margin-top : 1rem;
            }
+           #even {
+            font-size : 20px;
+           }
+        }
+        #heading {
+            background-color :   rgb(142, 159, 211);
+            margin : 1rem;
+            color : white;
         }
     }
 `

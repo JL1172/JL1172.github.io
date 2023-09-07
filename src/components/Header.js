@@ -25,6 +25,14 @@ const Header = (props) => {
                 </span>
                 Portfolio Equity : ${props.totalEquity}
             </div>
+            <div className="profile">
+                <span className="material-symbols-outlined">
+                    monitoring
+                </span>
+                Loss or Gains :
+                <span style={{ marginLeft: "1rem" }}
+                    className={props.totalLossOrGain > 0 ? "pcGreen" : props.totalLossOrGain < 0 ? "pcRed" : "pcNeutral"}>{props.totalLossOrGain}</span>
+            </div>
         </div>
     )
 }
@@ -36,7 +44,8 @@ const mapStateToProps = state => {
         secondaryQue: state.symbolQueryReducer.secondaryQue,
         hardFalse: state.symbolQueryReducer.hardFalse,
         crypto: state.crypto.cryptoData,
-        totalEquity : state.buyingForm.totalEquity,
+        totalEquity: state.buyingForm.totalEquity,
+        totalLossOrGain: state.buyingForm.totalLossOrGain,
     }
 }
 

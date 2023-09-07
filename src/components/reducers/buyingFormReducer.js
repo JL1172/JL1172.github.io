@@ -23,7 +23,7 @@ export const buyingFormReducer = (state = initialState, action) => {
         case (FLIP_PAGE):
             return ({ ...state, flipPage: !state.flipPage });
         case (CHANGE_SHARE_FORM_VALUE):
-            return ({ ...state, amountOfShares: action.payload[0], total: action.payload[1] * action.payload[0] });
+            return ({ ...state, amountOfShares: parseInt(action.payload[0]), total: action.payload[1] * action.payload[0] });
         case (SUBMIT_PURCHASE):
             return ({
                 ...state, totalEquity: action.payload[0].total, stockInformation: [...state.stockInformation, action.payload[0]],
@@ -43,16 +43,16 @@ export const buyingFormReducer = (state = initialState, action) => {
             return ({ ...state, isFetching: action.payload })
         case (RECTIFY_POSITIONS):
             const insertObj = {
-                currentPrice: action.payload[1].c,
-                priceWhenBought: action.payload[0],
+                currentPrice: parseFloat(action.payload[1].c),
+                priceWhenBought: parseFloat(action.payload[0]),
                 name: action.payload[2].description,
                 symbol: action.payload[2].displaySymbol,
                 shares: parseInt(action.payload[3]),
 
                 computations: {
-                    difference: (action.payload[0] - action.payload[1].c).toFixed(2),
+                    difference: parseFloat(action.payload[0] - action.payload[1].c),
                     percentageDifference:
-                        (((action.payload[0] - action.payload[1].c) / action.payload[0]) * 100).toFixed(),
+                    parseFloat(((action.payload[0] - action.payload[1].c) / action.payload[0]) * 100),
                 }
             }
 

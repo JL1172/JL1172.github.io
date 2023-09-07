@@ -106,21 +106,22 @@ const Graph = (props) => {
                                 </span>
                             </div>
                             {props.stockReconciliation.length > 0 && <>
-                                <h2>{props.stockReconciliation[0].name}</h2>
+                                <h2 id = "heading">{props.stockReconciliation[0].name}</h2>
                                 <h4>{props.stockReconciliation[0].symbol}</h4>
                                 <div id="gains" style={{ display: "flex", flexDirection: "column" }}>
-                                    <span className="spreadOut">Current Price : {props.stockReconciliation[0].currentPrice.toFixed(2)}</span>
-                                    <span className="spreadOut">Price When Bought : {props.stockReconciliation[0].priceWhenBought.toFixed(2)}</span>
-                                    <span className="spreadOut">Total shares : {props.stockReconciliation[0].shares}</span>
+                                    <span className="spreadOut">Current Price : <b>${props.stockReconciliation[0].currentPrice.toFixed(2)}</b></span>
+                                    <span className="spreadOut">Price When Bought : <b>${props.stockReconciliation[0].priceWhenBought.toFixed(2)}</b></span>
+                                    <span className="spreadOut">Total shares : <b>{props.stockReconciliation[0].shares}</b></span>
                                     <div id="secondGain" style={{ display: "flex", flexDirection: "row" }}>
-                                        <span className="even">{props.stockReconciliation[0].computations.difference < 0 ? "Total Loss"
-                                            : props.stockReconciliation[0].computations.difference > 0 ? "Total Gain" : "No change"}
-                                            <span className={props.stockReconciliation[0].computations.difference > 0 ? "chart pcGreen material-symbols-outlined" :
+                                        <span id = "even" className="even">{props.stockReconciliation[0].computations.difference < 0 ? "Total Loss"
+                                            : props.stockReconciliation[0].computations.difference > 0 ? "Total Gain" : "No change"}</span>
+                                            <span style = {{marginTop : "2rem", height : "50px", display : "flex",justifyContent : "center", alignItems : "center"}}
+                                             className={props.stockReconciliation[0].computations.difference > 0 ? "chart pcGreen material-symbols-outlined" :
                                                 props.stockReconciliation[0].computations.difference < 0 ? "chart pcRed material-symbols-outlined" : " chart pcNeutral material-symbols-outlined"
                                             }>
                                                 {props.stockReconciliation[0].computations.difference < 0 ? "trending_down" :
                                                     props.stockReconciliation[0].computations.difference > 0 ? "trending_up" : "trending_flat"}
-                                            </span></span>
+                                            </span>
                                         <span className="even">${props.stockReconciliation[0].computations.difference}</span>
                                         <span className="even">{props.stockReconciliation[0].computations.percentageDifference}%</span>
                                     </div>
